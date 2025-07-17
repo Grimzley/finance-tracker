@@ -1,0 +1,35 @@
+# Ignore virtual environments
+env/
+venv/
+.venv/
+
+# Ignore Python cache
+__pycache__/
+*.py[cod]
+
+# Ignore Git files
+.git/
+.gitignore
+
+# Ignore IDE/editor configs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Ignore media/static build files
+staticfiles/
+mediafiles/
+
+# Ignore OS and log files
+.DS_Store
+*.log
+
+# Ignore Firebase key
+firebase_key.json
+
+# Ignore test DB
+*.sqlite3
+
+# Ignore environment variables
+.env
