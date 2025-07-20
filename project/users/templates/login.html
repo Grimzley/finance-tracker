@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>{App Name}</h1>
+    </header>
+    <div class="container">
+        <button id="toggle-theme">🌙</button>
+        <form method="POST" id="form" class="auth-form" action="{% url 'login' %}">
+            {% csrf_token %}
+            <h2>Login</h2>
+            {% if error %}
+                <p class="feedback" id="feedback">{{error}}</p>
+            {% endif %}
+            <div class="spinner hidden" id="spinner"></div>
+            <input type="hidden" name="next" value="{{next}}">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="{% url 'register' %}">Register Here</a></p>
+    </div>
+    <footer>
+        <p>&copy; Grimsley 2025</p>
+    </footer>
+    <script src="{% static 'js/index.js' %}"></script>
+    <script src="{% static 'js/auth.js' %}"></script>
+</body>
+</html>

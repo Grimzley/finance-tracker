@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'home' %}">{App Name}</a></h1>
+        <a id="dashboard" href="{% url 'dashboard' %}">Dashboard</a>
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" id="logout">Logout</button>
+        </form>
+    </header>
+    <div class="container">
+        <button id="toggle-theme">🌙</button>
+        <h2>Finances</h2>
+    </div>
+    <footer>
+        <p>&copy; Grimsley 2025</p>
+    </footer>
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>
