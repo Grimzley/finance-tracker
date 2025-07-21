@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <title>Add Transaction</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1><a class="button" href="{% url 'home' %}">{App Name}</a></h1>
+        <a class="button" id="dashboard" href="{% url 'dashboard' %}">Dashboard</a>
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button class="button" type="submit" id="logout">Logout</button>
+        </form>
+    </header>
+    <div class="container">
+        <button class="button" id="toggle-theme">🌙</button>
+        <h2>Your Transactions</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.title }}</td>
+                    <td class="{{ transaction.transaction_type }}">
+                        ${{ transaction.amount }}
+                    </td>
+                    <td>{{ transaction.get_category }}</td>
+                    <td>{{ transaction.created_at|date:"M d, Y" }}</td>
+                    <td>
+                        <a href="{% url 'edit_transaction' transaction.pk %}" title="Edit">
+                            <img class="edit-icon" src="{% static 'images/edit.png' %}" alt="Edit">
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">No transactions found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a class="button" href="{% url 'create_transaction' %}">Add Transaction</a>
+    </div>
+    <footer>
+        <p>&copy; Grimsley 2025</p>
+    </footer>
+    <script src="{% static 'js/index.js' %}"></script>
+    <script src="{% static 'js/category.js' %}"></script>
+</body>
+</html>

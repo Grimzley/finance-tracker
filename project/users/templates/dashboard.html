@@ -10,15 +10,15 @@
 </head>
 <body>
     <header>
-        <h1><a href="{% url 'home' %}">{App Name}</a></h1>
-        <a id="dashboard" href="{% url 'dashboard' %}">Dashboard</a>
+        <h1><a class="button" href="{% url 'home' %}">{App Name}</a></h1>
+        <a class="button" id="dashboard" href="{% url 'dashboard' %}">Dashboard</a>
         <form method="POST" action="{% url 'logout' %}">
             {% csrf_token %}
-            <button type="submit" id="logout">Logout</button>
+            <button class="button" type="submit" id="logout">Logout</button>
         </form>
     </header>
     <div class="container">
-        <button id="toggle-theme">🌙</button>
+        <button class="button" id="toggle-theme">🌙</button>
         <h2>Edit Account</h2>
     </div>
     <footer>

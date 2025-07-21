@@ -25,9 +25,9 @@ body {
   transition: background 0.2s, color 0.2s;
 }
 
+/* Header/Footer Styles */
 header, footer{
   width: 100%;
-  padding: 1rem 0;
   background: var(--primary);
   color: white;
   text-align: center;
@@ -38,9 +38,6 @@ header {
 }
 footer {
   bottom: 0;
-}
-header a {
-  color: inherit;
 }
 header #logout {
   position: absolute;
@@ -62,7 +59,12 @@ header #dashboard {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   text-align: center;
   position: relative;
-  min-width: 300px;
+  min-width: 400px;
+}
+
+.app a {
+  display: block;
+  margin: 10px 0;
 }
 
 /* Form Styles */
@@ -71,7 +73,7 @@ header #dashboard {
   flex-direction: column;
   gap: 1rem;
 }
-input {
+input, select {
   padding: 0.75rem;
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -96,8 +98,10 @@ input {
 
 /* Button Styles */
 button {
-  padding: 0.75rem;
   border: none;
+}
+.button{
+  padding: 0.75rem;
   border-radius: 6px;
   background: var(--primary);
   color: white;
@@ -115,6 +119,33 @@ button:hover, a:hover{
   right: 1rem;
   background: transparent;
   font-size: 1.2rem;
+}
+
+/* Transaction Styles */
+table {
+  width: 100%;
+  padding: 1rem;
+  border-spacing: 1em;
+}
+.income {
+  color: green;
+}
+.expense {
+  color: red;
+}
+.delete-form {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+.delete-btn {
+  background-color: transparent;
+}
+.delete-icon {
+  width: 32px;
+}
+.edit-icon {
+  width: 32px;
 }
 
 a {

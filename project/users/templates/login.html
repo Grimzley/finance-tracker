@@ -13,7 +13,7 @@
         <h1>{App Name}</h1>
     </header>
     <div class="container">
-        <button id="toggle-theme">🌙</button>
+        <button class="button" id="toggle-theme">🌙</button>
         <form method="POST" id="form" class="auth-form" action="{% url 'login' %}">
             {% csrf_token %}
             <h2>Login</h2>
@@ -24,7 +24,7 @@
             <input type="hidden" name="next" value="{{next}}">
             <input type="text" name="username" placeholder="Username" required>
             <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Login</button>
+            <button class="button" type="submit">Login</button>
         </form>
         <p>Don't have an account? <a href="{% url 'register' %}">Register Here</a></p>
     </div>

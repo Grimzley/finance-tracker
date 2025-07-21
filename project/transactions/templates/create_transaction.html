@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
-    <title>Home</title>
+    <title>Add Transaction</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 </head>
 <body>
@@ -19,20 +19,21 @@
     </header>
     <div class="container">
         <button class="button" id="toggle-theme">🌙</button>
-        <h2>Manage Finances</h2>
-        <div class="app">
-            <a class="button" href="{% url 'transaction_list' %}">Transactions</a>
-        </div>
-        <div class="app">
-            <a class="button" href="">Budget Planner</a>
-        </div>
-        <div class="app">
-            <a class="button" href="">Spending Reports</a>
-        </div>
+        <h2>Add Transaction</h2>
+        <form method="POST" id="form" class="auth-form">
+            {% csrf_token %}
+            {{form.title}}
+            {{form.amount}}
+            {{form.transaction_type}}
+            {{form.category}}
+            <button class="button" type="submit">Add</button>
+            <a href="{% url 'transaction_list' %}">Cancel</a>
+        </form>
     </div>
     <footer>
         <p>&copy; Grimsley 2025</p>
     </footer>
     <script src="{% static 'js/index.js' %}"></script>
+    <script src="{% static 'js/category.js' %}"></script>
 </body>
 </html>
