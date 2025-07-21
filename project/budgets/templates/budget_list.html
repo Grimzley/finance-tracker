@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <title>Budgets</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1><a class="button" href="{% url 'home' %}">{App Name}</a></h1>
+        <a class="button" id="dashboard" href="{% url 'dashboard' %}">Dashboard</a>
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button class="button" type="submit" id="logout">Logout</button>
+        </form>
+    </header>
+    <div class="container">
+        <button class="button" id="toggle-theme">🌙</button>
+        <h2>My Budget for {{ curr_month|date:"F Y" }}</h2>
+        {% if form_disabled %}
+        <div class="alert alert-info">
+            You've created budgets for all available categories this month.
+        </div>
+        {% else %}
+        <form method="post" class="mb-4">
+            {% csrf_token %}
+            {{ form.category }}
+            {{ form.amount }}
+            <button class="button" type="submit">Add Budget</button>
+        </form>
+        {% endif %}
+        
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Category</th>
+                <th>Budgeted</th>
+                <th>Spent</th>
+                <th>Remaining</th>
+                <th>Edit</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for budget in budgets %}
+                <tr>
+                <td>{{ budget.get_category_display }}</td>
+                <td>${{ budget.amount }}</td>
+                <td>${{ budget.spent|floatformat:2 }}</td>
+                {% with remaining=budget.remaining %}
+                    <td class="{% if remaining < 0 %}negative{% elif remaining > 0 %}positive{% else %}neutral{% endif %}">
+                        ${{ remaining|floatformat:2 }}
+                    </td>
+                {% endwith %}
+                <td>
+                    <a href="{% url 'edit_budget' budget.pk %}" title="Edit">
+                            <img class="edit-icon" src="{% static 'images/edit.png' %}" alt="Edit">
+                        </a>
+                </td>
+                </tr>
+            {% empty %}
+                <tr><td colspan="4">No budgets yet for this month.</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <footer>
+        <p>&copy; Grimsley 2025</p>
+    </footer>
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>

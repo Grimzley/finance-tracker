@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
-    <title>Home</title>
+    <title>Edit Budget</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 </head>
 <body>
@@ -19,16 +19,20 @@
     </header>
     <div class="container">
         <button class="button" id="toggle-theme">🌙</button>
-        <h2>Manage Finances</h2>
-        <div class="app">
-            <a class="button" href="{% url 'transaction_list' %}">Transactions</a>
-        </div>
-        <div class="app">
-            <a class="button" href="{% url 'budget_list' %}">Budget Planner</a>
-        </div>
-        <div class="app">
-            <a class="button" href="">Spending Reports</a>
-        </div>
+        <h2>Edit Budget</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.category }}
+            {{ form.amount }}
+            <button class="button" type="submit">Save</button>
+            <a href="{% url 'budget_list' %}">Cancel</a>
+        </form>
+        <form class="delete-form" method="post" action="{% url 'delete_budget' budget.pk %}">
+            {% csrf_token %}
+            <button class="delete-btn" type="submit" title="Delete Transaction">
+                <img class="delete-icon" src="{% static 'images/delete.png' %}" alt="Delete Icon">
+            </button>
+        </form>
     </div>
     <footer>
         <p>&copy; Grimsley 2025</p>

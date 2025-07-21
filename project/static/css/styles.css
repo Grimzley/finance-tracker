@@ -68,7 +68,7 @@ header #dashboard {
 }
 
 /* Form Styles */
-.auth-form {
+form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -127,12 +127,6 @@ table {
   padding: 1rem;
   border-spacing: 1em;
 }
-.income {
-  color: green;
-}
-.expense {
-  color: red;
-}
 .delete-form {
   position: absolute;
   top: 1rem;
@@ -146,6 +140,16 @@ table {
 }
 .edit-icon {
   width: 32px;
+}
+
+.income, .positive{
+  color: green;
+}
+.expense, .negative {
+  color: red;
+}
+.neutral {
+  color:gray;
 }
 
 a {

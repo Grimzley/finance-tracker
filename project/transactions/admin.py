@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Transaction
-from .form import TransactionAdminForm
+from .forms import TransactionAdminForm
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):

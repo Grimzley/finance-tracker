@@ -14,7 +14,7 @@
     </header>
     <div class="container">
         <button class="button" id="toggle-theme">🌙</button>
-        <form method="POST" id="form" class="auth-form" action="{% url 'register' %}">
+        <form method="POST" action="{% url 'register' %}">
             {% csrf_token %}
             <h2>Register</h2>
             {% if error %}
