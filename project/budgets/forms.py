@@ -8,7 +8,6 @@ class BudgetForm(forms.ModelForm):
         widgets = {
             'amount': forms.NumberInput(attrs={
                 'placeholder': 'Enter your budget limit',
-                'step': '1.00'
             }),
         }
 

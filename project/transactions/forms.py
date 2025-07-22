@@ -36,7 +36,6 @@ class TransactionForm(forms.ModelForm):
             }),
             'amount': forms.NumberInput(attrs={
                 'placeholder': 'Amount',
-                'step': '1.00'
             }),
         }
 
