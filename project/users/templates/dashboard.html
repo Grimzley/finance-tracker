@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <h1><a class="button" href="{% url 'home' %}">{App Name}</a></h1>
+        <h1><a class="button" href="{% url 'dashboard' %}">{App Name}</a></h1>
         <a class="button" id="dashboard" href="{% url 'dashboard' %}">Dashboard</a>
         <form method="POST" action="{% url 'logout' %}">
             {% csrf_token %}

@@ -20,7 +20,7 @@ def register_view(request):
         else:
             error_message = "Invalid Credentials!"
     form = RegisterForm()
-    return render(request, 'register.html', {'error': error_message, 'form': form})
+    return render(request, 'landing.html', {'error': error_message, 'form': form})
 
 def login_view(request):
     error_message = None
@@ -30,27 +30,26 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            next_url = request.POST.get('next') or request.GET.get('next') or 'home'
+            next_url = request.POST.get('next') or request.GET.get('next') or 'dashboard'
             return redirect(next_url)
         else:
             error_message = "Invalid Credentials!"
-    return render(request, 'login.html', {'error': error_message})
+    form = RegisterForm()
+    return render(request, 'landing.html', {'error': error_message, 'form': form})
 
 def logout_view(request):
     if request.method == "POST":
         logout(request)
-        return redirect('login')
-    else:
-        return redirect('home')
+    return redirect('dashboard')
 
 @login_required
-def home_view(request):
-    return render(request, 'home.html')
+def dashboard_view(request):
+    return render(request, 'dashboard.html')
 
 class ProtectedView(LoginRequiredMixin, View):
     login_url = '/login/'
     redirect_field_name = 'redirect_to'
 
     def get(self, request):
-        return render(request, 'dashboard.html')
+        return render(request, 'settings.html')
     

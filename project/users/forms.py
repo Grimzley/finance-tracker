@@ -3,9 +3,18 @@ from django.contrib.auth.models import User
 
 class RegisterForm(forms.ModelForm):
 
-    username = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Username'}))
-    password = forms.CharField(label='', widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
-    password_confirm = forms.CharField(label='', widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}))
+    username = forms.CharField(label='', widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Username'
+    }))
+    password = forms.CharField(label='', widget=forms.PasswordInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Password'
+    }))
+    password_confirm = forms.CharField(label='', widget=forms.PasswordInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Confirm Password'
+    }))
 
     class Meta:
         model = User
