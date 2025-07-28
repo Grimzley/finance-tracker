@@ -1,15 +1,17 @@
+/* Landing Page Styles */
 section {
   padding: 60px 0;
 }
-
 #login .form-control {
   margin: 10px 0;
 }
-
 .link {
   cursor: pointer;
 }
-
 .hidden {
   display: none;
+}
+
+.card {
+  margin: 10px 0;
 }
