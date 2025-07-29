@@ -3,9 +3,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from .forms import RegisterForm
+from transactions.forms import TransactionForm
+
 from django.contrib.auth.models import User
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views import View
+from transactions.models import Transaction
 
 def register_view(request):
     error_message = None
@@ -44,12 +45,11 @@ def logout_view(request):
 
 @login_required
 def dashboard_view(request):
-    return render(request, 'dashboard.html')
+    recent = Transaction.objects.filter(user=request.user).order_by('-created_at')[:7]
+    form = TransactionForm()
+    return render(request, 'dashboard.html', {'form': form, 'recent': recent})
 
-class ProtectedView(LoginRequiredMixin, View):
-    login_url = '/login/'
-    redirect_field_name = 'redirect_to'
-
-    def get(self, request):
-        return render(request, 'settings.html')
+@login_required
+def settings_view(request):
+    return render(request, 'settings.html')
     

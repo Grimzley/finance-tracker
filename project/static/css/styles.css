@@ -1,3 +1,12 @@
+/* Temp Fixes */
+html {
+  background-color: #212529;
+}
+button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 /* Landing Page Styles */
 section {
   padding: 60px 0;
@@ -14,4 +23,15 @@ section {
 
 .card {
   margin: 10px 0;
+}
+
+/* Dashboard Styles */
+.modal .form-control {
+  margin: 10px 0;
+}
+.income {
+  color: green;
+}
+.expense {
+  color: red;
 }

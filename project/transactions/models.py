@@ -18,9 +18,10 @@ class Transaction(models.Model):
         FOOD = 'food', 'Food'
         BILLS = 'bills', 'Bills'
         TRANSPORT = 'transport', 'Transportation'
-        HEALTH = 'health', 'Healthcare'
-        ENTERTAINMENT = 'entertainment', 'Entertainment'
         SHOPPING = 'shopping', 'Shopping'
+        ENTERTAINMENT = 'entertainment', 'Entertainment'
+        HEALTH = 'health', 'Healthcare'
+        SAVINGS = 'savings', 'Savings'
         OTHER = 'exp_other', 'Other'
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

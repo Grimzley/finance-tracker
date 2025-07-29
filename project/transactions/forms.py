@@ -32,20 +32,23 @@ class TransactionForm(forms.ModelForm):
 
         widgets = {
             'title': forms.TextInput(attrs={
-                'placeholder': 'Title'
+                'class': 'form-control',
+                'placeholder': 'Title',
             }),
             'amount': forms.NumberInput(attrs={
+                'class': 'form-control',
                 'placeholder': 'Amount',
+            }),
+            'transaction_type': forms.Select(attrs={
+                'class': 'form-control',
+            }),
+            'category': forms.Select(attrs={
+                'class': 'form-control',
+                'required': 'required',
             }),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields['category'].widget = forms.Select(choices=[('', 'Select transaction type first')])
-
-        transaction_type = self.data.get('transaction_type') or self.initial.get('transaction_type')
-        if transaction_type == Transaction.TransactionType.INCOME:
-            self.fields['category'].choices = Transaction.IncomeCategory.choices
-        elif transaction_type == Transaction.TransactionType.EXPENSE:
-            self.fields['category'].choices = Transaction.ExpenseCategory.choices
+        self.fields['category'].choices= [('', 'Select transaction type first')]
