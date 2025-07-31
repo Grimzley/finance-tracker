@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from datetime import date, timedelta
 
 from .forms import RegisterForm
 from transactions.forms import TransactionForm
@@ -11,6 +12,7 @@ from transactions.models import Transaction
 from budgets.models import Budget
 
 from budgets.utils import get_monthly_budget_summary
+from reports.utils import get_monthly_summary, get_total_summary
 
 def register_view(request):
     error_message = None
@@ -55,7 +57,17 @@ def dashboard_view(request):
     form = TransactionForm()
     budgets = get_monthly_budget_summary(request.user)
     formset = BudgetFormSet(queryset=Budget.objects.filter(user=request.user))
-    return render(request, 'dashboard.html', {'recent': recent, 'form': form, 'budgets': budgets, 'formset': formset})
+
+    today = date.today()
+    total = get_total_summary(request.user)
+    past = []
+    for i in range(5):
+        first_day = (today.replace(day=1) - timedelta(days=30*i)).replace(day=1)
+        summary = get_monthly_summary(request.user, first_day)
+        past.append(summary)
+    summary = past.pop(0)
+    
+    return render(request, 'dashboard.html', {'recent': recent, 'form': form, 'budgets': budgets, 'formset': formset, 'summary': summary, 'total': total, 'past': past})
 
 @login_required
 def settings_view(request):

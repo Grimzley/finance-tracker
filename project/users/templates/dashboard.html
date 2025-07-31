@@ -55,15 +55,38 @@
     <main class="bg-palette-one">
         <div class="container-xl border-top border-bottom">
             <div class="row justify-content-center text-light">
+                <!-- Sidebar -->
                 <div class="col-4 bg-palette-two d-none d-xl-block text-center">
                     <!-- Summary -->
                     <div class="row">
                         <h3>Lifetime Finances</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum molestiae dolorem consectetur, incidunt reprehenderit velit!</p>
+                        <div class="col-6">
+                            Earned: <span class="text-success">${{ total.total_income }}</span>
+                        </div>
+                        <div class="col-6">
+                            Spent: <span class="text-danger">${{ total.total_expenses }}</span>
+                        </div>
+                        <div class="col-6">
+                            Saved: <span class="text-palette-five">${{ total.total_savings }}</span>
+                        </div>
+                        <div class="col-6">
+                            Available: <span class="text-success">${{ total.net_finances }}</span>
+                        </div>
                     </div>
-                    <div class="row">
+                    <div class="row my-3">
                         <h3>This Month</h3>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, laborum earum atque doloremque perspiciatis quod.</p>
+                        <div class="col-6">
+                            Earned: <span class="text-success">${{ summary.total_income }}</span>
+                        </div>
+                        <div class="col-6">
+                            Spent: <span class="text-danger">${{ summary.total_expenses }}</span>
+                        </div>
+                        <div class="col-6">
+                            Saved: <span class="text-palette-five">${{ summary.total_savings }}</span>
+                        </div>
+                        <div class="col-6">
+                            Available: <span class="text-success">${{ summary.net_finances }}</span>
+                        </div>
                     </div>
                     <!-- Transactions -->
                     <div class="row border-top">
@@ -118,10 +141,47 @@
                             <a href="{% url 'transaction_list' %}" class="btn btn-palette-three">View Transactions</a>
                         </div>
                     </div>
+                    <!-- Summary -->
+                    <div class="row justify-content-center border-bottom text-center d-xl-none my-3">
+                        <div class="col-sm-5">
+                            <div class="row">
+                                <h3>Lifetime Finances</h3>
+                                <div class="col-md-6">
+                                    Earned: <span class="text-success">${{ total.total_income }}</span>
+                                </div>
+                                <div class="col-md-6">
+                                    Spent: <span class="text-danger">${{ total.total_expenses }}</span>
+                                </div>
+                                <div class="col-md-6">
+                                    Saved: <span class="text-palette-five">${{ total.total_savings }}</span>
+                                </div>
+                                <div class="col-md-6">
+                                    Available: <span class="text-success">${{ total.net_finances }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="row">
+                                <h3>This Month</h3>
+                                <div class="col-md-6">
+                                    Earned: <span class="text-success">${{ summary.total_income }}</span>
+                                </div>
+                                <div class="col-md-6">
+                                    Spent: <span class="text-danger">${{ summary.total_expenses }}</span>
+                                </div>
+                                <div class="col-md-6">
+                                    Saved: <span class="text-palette-five">${{ summary.total_savings }}</span>
+                                </div>
+                                <div class="col-md-6">
+                                    Available: <span class="text-success">${{ summary.net_finances }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Budgets -->
                     <div class="row align-items-center my-3">
                         <div class="col-md-6 text-center text-md-start">
-                            <h3>July 2025</h3>
+                            <h3>{{ summary.month|date:"F Y" }}</h3>
                         </div>
                         <div class="col-md-6 text-center text-md-end">
                             <button class="btn btn-palette-three" data-bs-toggle="modal" data-bs-target="#budget-modal">
@@ -135,7 +195,7 @@
                             <div class="card bg-palette-two border-palette-five text-light">
                                 <div class="card-body text-center">
                                     <i style="font-size: 2em;" class="bi {{ budget.category|category_icon }} {{ budget.category|category_color }}"></i>
-                                    <div class="card-title">
+                                    <div class="card-title text-palette-five">
                                         Budget: 
                                         {% if budget.remaining is None %}
                                             Unlimited
@@ -143,7 +203,7 @@
                                             {{ budget.limit }}
                                         {% endif %}
                                     </div>
-                                    <div class="card-text">Spent: ${{ budget.spent }}</div>
+                                    <div class="card-text text-palette-five">Spent: ${{ budget.spent }}</div>
                                     {% if budget.remaining is not None %}
                                         <div class="card-text lead fw-bold">
                                             {% if budget.remaining < 0 %}
@@ -173,46 +233,28 @@
                         </div>
                     </div>
                     <div class="row justify-content-center align-items-center text-dark my-3">
-                        <div class="col-sm-8 col-md-2">
+                        {% for month in past %}
+                        <div class="col-sm-8 col-md-3">
                             <div class="card bg-palette-two border-palette-five text-light">
                                 <div class="card-body text-center">
                                     <i class="bi bi-coin text-palette-yellow"></i>
-                                    <h4 class="card-title">Jun</h4>
+                                    <h4 class="card-title">{{ month.month|date:"M" }}</h4>
+                                    <div>
+                                        <span class="text-success">${{ month.total_income }}</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-danger">${{ month.total_expenses }}</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-palette-five">${{ month.total_savings }}</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-success">${{ month.net_finances }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-8 col-md-2">
-                            <div class="card bg-palette-two border-palette-five text-light">
-                                <div class="card-body text-center">
-                                    <i class="bi bi-coin text-palette-yellow"></i>
-                                    <h4 class="card-title">May</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-8 col-md-2">
-                            <div class="card bg-palette-two border-palette-five text-light">
-                                <div class="card-body text-center">
-                                    <i class="bi bi-coin text-palette-yellow"></i>
-                                    <h4 class="card-title">Apr</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-8 col-md-2">
-                            <div class="card bg-palette-two border-palette-five text-light">
-                                <div class="card-body text-center">
-                                    <i class="bi bi-coin text-palette-yellow"></i>
-                                    <h4 class="card-title">Mar</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-8 col-md-2">
-                            <div class="card bg-palette-two border-palette-five text-light">
-                                <div class="card-body text-center">
-                                    <i class="bi bi-coin text-palette-yellow"></i>
-                                    <h4 class="card-title">Feb</h4>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -247,7 +289,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-palette-two text-light">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Budget Limits</h5>
+                    <h5 class="modal-title">Edit Monthly Budget Limits</h5>
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
