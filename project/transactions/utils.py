@@ -19,20 +19,20 @@ def get_category_icon(category):
 def get_category_color(category):
     return {
         'salary': 'text-success',
-        'freelance': 'text-primary',
-        'investment': 'text-info',
-        'gift': 'text-info',
-        'inc_other': 'text-secondary',
+        'freelance': 'text-palette-grey',
+        'investment': 'text-palette-blue',
+        'gift': 'text-palette-pink',
+        'inc_other': 'text-palette-one',
 
-        'food': 'text-warning',
-        'bills': 'text-danger',
-        'transport': 'text-muted',
-        'shopping': 'text-secondary',
-        'entertainment': 'text-primary',
-        'health': 'text-danger',
-        'savings': 'text-success',
-        'exp_other': 'text-muted',
-    }.get(category, 'text-muted')
+        'food': 'text-palette-five',
+        'bills': 'text-palette-teal',
+        'transport': 'text-palette-brown',
+        'shopping': 'text-palette-grey',
+        'entertainment': 'text-palette-orange',
+        'health': 'text-palette-red',
+        'savings': 'text-palette-pink',
+        'exp_other': 'text-palette-one',
+    }.get(category, 'text-palette-five')
 
 def get_category_description(category):
     return {

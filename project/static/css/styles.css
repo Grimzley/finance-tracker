@@ -1,10 +1,14 @@
 /* Temp Fixes */
 html {
-  background-color: #212529;
+  background-color: #17171c;
 }
 button:focus {
     outline: none !important;
     box-shadow: none !important;
+}
+
+.card {
+  margin: 10px 0;
 }
 
 /* Landing Page Styles */
@@ -21,19 +25,10 @@ section {
   display: none;
 }
 
-.card {
-  margin: 10px 0;
-}
 
 /* Dashboard Styles */
 .modal .form-control, .modal .input-group-text {
   margin: 10px 0;
-}
-.income {
-  color: green;
-}
-.expense {
-  color: red;
 }
 
 /* Transaction List Styles */

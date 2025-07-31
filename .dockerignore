@@ -33,3 +33,5 @@ firebase_key.json
 
 # Ignore environment variables
 .env
+
+node_modules/

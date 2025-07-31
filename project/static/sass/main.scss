@@ -1,0 +1,22 @@
+@import '../../../node_modules/bootstrap/scss/_functions';
+@import '../../../node_modules/bootstrap/scss/_variables';
+
+$custom-colors: (
+    "palette-one": #17171c,
+    "palette-two": #2c2c30,
+    "palette-three": #4c4c4d,
+    "palette-four": #79797c,
+    "palette-five": #b1b1b4,
+    "palette-teal": #26a69a,
+    "palette-brown": #5d4037,
+    "palette-grey": #607d8b,
+    "palette-orange": #ff9800,
+    "palette-red": #f44336,
+    "palette-pink": #f8bbd0,
+    "palette-blue": #2196f3,
+    "palette-yellow": #ffeb3b,
+);
+
+$theme-colors: map-merge($custom-colors, $theme-colors);
+
+@import '../../../node_modules/bootstrap/scss/bootstrap';

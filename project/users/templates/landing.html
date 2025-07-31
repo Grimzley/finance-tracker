@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
     <title>BalancedBudget</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="{% static 'css/main.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-md bg-palette-one navbar-dark">
         <div class="container-lg">
             <a href="#hero" class="navbar-brand">
                 <h1 class="fw-bold text-success">
@@ -94,7 +94,7 @@
                 <!-- Feature 3 -->
                 <div class="col-7 col-lg-4">
                     <div class="card border-0">
-                        <img class="card-img-top" src="{% static 'images/transactions.png' %}" alt="Feature 3"></img>
+                        <img class="card-img-top" src="{% static 'images/trends.png' %}" alt="Feature 3"></img>
                         <div class="card-body text-center">
                             <h5 class="card-title">Visualize Your Spending</h5>
                         </div>
@@ -271,7 +271,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark">
+    <footer class="bg-palette-one">
         <div class="container-lg p-3">
             <div class="text-center">
                 <div class="text-light">&copy; Grimsley 2025</div>
