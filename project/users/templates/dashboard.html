@@ -16,7 +16,7 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-        <div class="container-lg">
+        <div class="container-xl">
             <div class="navbar-brand">
                 <h1 class="fw-bold text-success">
                     BalancedBudget
@@ -53,18 +53,19 @@
 
     <!-- Dashboard -->
     <main class="bg-dark">
-        <div class="container-lg border-top border-bottom">
+        <div class="container-xl border-top border-bottom">
             <div class="row justify-content-center text-light">
-                <!-- Summary & Transactions -->
-                <div class="col-4 d-none d-lg-block text-center">
+                <div class="col-4 d-none d-xl-block text-center">
+                    <!-- Summary -->
                     <div class="row">
                         <h3>Lifetime Finances</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla delectus velit, enim, deleniti optio ipsam, qui fugit quam minus nihil incidunt. Non reprehenderit aut impedit dolorum aliquid velit eaque esse.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum molestiae dolorem consectetur, incidunt reprehenderit velit!</p>
                     </div>
                     <div class="row">
                         <h3>This Month</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo commodi, sint tempora impedit repudiandae eos laboriosam quis itaque laudantium veritatis quas dolores tempore illum voluptatem omnis ipsa rem similique distinctio?</p>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, laborum earum atque doloremque perspiciatis quod.</p>
                     </div>
+                    <!-- Transactions -->
                     <div class="row border-top">
                         <h3 class="my-3">Recent Transactions</h3>
                         <table class="table table-dark table-striped">
@@ -80,7 +81,7 @@
                                 </tr>
                                 {% empty %}
                                 <tr>
-                                    <td>Add Transactions to Get Started</td>
+                                    <td>Add a Transaction to Get Started!</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -99,9 +100,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col col-lg-8">
+                <div class="col col-xl-8">
                     <!-- Dashboard Overview -->
-                    <div class="row align-items-center border-bottom">
+                    <div class="row align-items-center border-bottom py-3">
                         <div class="col-md-5 text-center text-md-start">
                             <h3>Dashboard Overview</h3>
                             <p>Manage and monitor your finances</p>
@@ -113,83 +114,48 @@
                             <a href="{% url 'transaction_list' %}" class="btn btn-secondary">View Transactions</a>
                         </div>
                     </div>
-                    <!-- Budgets and Reports -->
-                    <div class="row align-items-center m-3">
+                    <!-- Budgets -->
+                    <div class="row align-items-center my-3">
                         <div class="col-md-6 text-center text-md-start">
                             <h3>July 2025</h3>
                         </div>
                         <div class="col-md-6 text-center text-md-end">
-                            <a href="{% url 'dashboard' %}" class="btn btn-secondary">Adjust Limits</a>
+                            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#budget-modal">
+                                Adjust Limits
+                            </button>
                         </div>
                     </div>
-                    <div class="row align-items-center text-dark mx-3">
-                        <!-- Food -->
-                        <div class="col-sm-6 col-md-3">
+                    <div class="row justify-content-center align-items-center text-dark">
+                        {% for budget in budgets %}
+                        <div class="col-sm-7 col-md-5 col-lg-3">
                             <div class="card">
                                 <div class="card-body text-center">
-                                    <i class="bi {{ 'food'|category_icon }} {{ 'food'|category_color }}"></i>
+                                    <i style="font-size: 2em;" class="bi {{ budget.category|category_icon }} {{ budget.category|category_color }}"></i>
+                                    <div class="card-title">
+                                        Budget: 
+                                        {% if budget.remaining is None %}
+                                            Unlimited
+                                        {% else %}
+                                            {{ budget.limit }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="card-text">Spent: ${{ budget.spent }}</div>
+                                    {% if budget.remaining is not None %}
+                                        <div class="card-text lead">
+                                            {% if budget.remaining < 0 %}
+                                                <span class="text-danger">${{ budget.remaining }}</span>
+                                            {% else %}
+                                                <span class="text-success">${{ budget.remaining }}</span>
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
-                        <!-- Bills -->
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <i class="bi {{ 'bills'|category_icon }} {{ 'bills'|category_color }}"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Transportation -->
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <i class="bi {{ 'transport'|category_icon }} {{ 'transport'|category_color }}"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Shopping -->
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <i class="bi {{ 'shopping'|category_icon }} {{ 'shopping'|category_color }}"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Entertainment -->
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <i class="bi {{ 'entertainment'|category_icon }} {{ 'entertainment'|category_color }}"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Health -->
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <i class="bi {{ 'health'|category_icon }} {{ 'health'|category_color }}"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Savings -->
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <i class="bi {{ 'savings'|category_icon }} {{ 'savings'|category_color }}"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Other -->
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <i class="bi {{ 'exp_other'|category_icon }} {{ 'other'|category_color }}"></i>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
-                    <!-- Previous Months -->
-                    <div class="row align-items-center border-bottom mx-3">
+                    <!-- Reports -->
+                    <div class="row align-items-center border-bottom">
                         <div class="col-md-6 text-center text-md-start">
                             <h3>Previous Months</h3>
                         </div>
@@ -246,12 +212,12 @@
         </div>
     </main>
 
-    <!-- Modal -->
+    <!-- Modals -->
     <div class="modal fade" id="transaction-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-dark text-light">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modal-title">Add Transaction</h5>
+                    <h5 class="modal-title">Add Transaction</h5>
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -270,16 +236,51 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="budget-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Budget Limits</h5>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="px-5" method="POST" action="{% url 'edit_budget' %}">
+                        {% csrf_token %}
+                        {{ formset.management_form }}
+                        {% for forms in formset %}
+                            {{ forms.id }}
+                            {{ forms.category }}
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi {{ forms.instance.category|category_icon }} {{ forms.instance.category|category_color }}"></i>
+                                </span>
+                                {{ forms.limit }}
+                                <span class="input-group-text">
+                                    <span class="tt" data-bs-placement="right" title="{{ forms.instance.category|category_description }}">
+                                        <i class="bi bi-info-circle"></i>
+                                    </span>
+                                </span>
+                            </div>
+                        {% endfor %}
+                        <div class="text-center">
+                            <button class="btn btn-success" type="submit">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-dark">
-        <div class="container-lg p-3">
+        <div class="container-xl p-3">
             <div class="text-center text-light">
                 &copy; Grimsley 2025
             </div>
         </div>
     </footer>
     <script src="{% static 'js/transaction.js' %}"></script>
+    <script src="{% static 'js/tooltips.js' %}"></script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>

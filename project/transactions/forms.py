@@ -38,6 +38,7 @@ class TransactionForm(forms.ModelForm):
             'amount': forms.NumberInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Amount',
+                'min': 0,
             }),
             'transaction_type': forms.Select(attrs={
                 'class': 'form-control',

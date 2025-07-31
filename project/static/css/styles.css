@@ -26,7 +26,7 @@ section {
 }
 
 /* Dashboard Styles */
-.modal .form-control {
+.modal .form-control, .modal .input-group-text {
   margin: 10px 0;
 }
 .income {
@@ -34,4 +34,9 @@ section {
 }
 .expense {
   color: red;
+}
+
+/* Transaction List Styles */
+td.text-truncate {
+  max-width: 100px;
 }

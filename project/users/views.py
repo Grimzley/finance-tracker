@@ -4,9 +4,13 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import RegisterForm
 from transactions.forms import TransactionForm
+from budgets.forms import BudgetFormSet
 
 from django.contrib.auth.models import User
 from transactions.models import Transaction
+from budgets.models import Budget
+
+from budgets.utils import get_monthly_budget_summary
 
 def register_view(request):
     error_message = None
@@ -17,6 +21,8 @@ def register_view(request):
             password = form.cleaned_data.get('password')
             user = User.objects.create_user(username=username, password=password)
             login(request, user)
+            for category, _ in Transaction.ExpenseCategory.choices:
+                Budget.objects.create(user=user, category=category, limit=0)
             return redirect('dashboard')
         else:
             error_message = "Invalid Credentials!"
@@ -47,7 +53,9 @@ def logout_view(request):
 def dashboard_view(request):
     recent = Transaction.objects.filter(user=request.user).order_by('-created_at')[:7]
     form = TransactionForm()
-    return render(request, 'dashboard.html', {'form': form, 'recent': recent})
+    budgets = get_monthly_budget_summary(request.user)
+    formset = BudgetFormSet(queryset=Budget.objects.filter(user=request.user))
+    return render(request, 'dashboard.html', {'recent': recent, 'form': form, 'budgets': budgets, 'formset': formset})
 
 @login_required
 def settings_view(request):

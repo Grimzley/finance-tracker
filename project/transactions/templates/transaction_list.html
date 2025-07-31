@@ -16,7 +16,7 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-        <div class="container-lg">
+        <div class="container-xl">
             <div class="navbar-brand">
                 <h1 class="fw-bold text-success">
                     BalancedBudget
@@ -53,48 +53,54 @@
 
     <!-- Dashboard -->
     <main class="bg-dark">
-        <div class="container-lg border-top border-bottom">
+        <div class="container-xl border-top border-bottom">
             <div class="row">
                 <div class="col text-center">
                     <h1 class="display-4 text-light">My Transactions</h1>
-                    <table class="table table-dark">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Amount</th>
-                                <th>Category</th>
-                                <th>Date</th>
-                                <th>Edit</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for transaction in transactions %}
-                            <tr>
-                                <td>{{ transaction.title }}</td>
-                                <td class="{{ transaction.transaction_type }}">
-                                    ${{ transaction.amount }}
-                                </td>
-                                <td><i class="bi {{ transaction.category|category_icon }}  {{ transaction.category|category_color }}"></i> {{ transaction.get_category }}</td>
-                                <td>{{ transaction.created_at|date:"M d, Y" }}</td>
-                                <td>
-                                    <span class="link text-warning edit-button"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#transaction-modal"
-                                    data-title="{{ transaction.title }}"
-                                    data-amount="{{ transaction.amount }}"
-                                    data-transaction-type="{{ transaction.transaction_type }}" data-category="{{ transaction.category }}"
-                                    data-edit-url="{% url 'edit_transaction' transaction.id %}" data-delete-url="{% url 'delete_transaction' transaction.id %}">
-                                        <i class="bi bi-pencil-fill"></i>
-                                    </span>
-                                </td>
-                            </tr>
-                            {% empty %}
-                            <tr>
-                                <td colspan="4">No transactions found.</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        {% if transactions %}
+                        <table class="table table-dark table-striped">
+                        {% else %}
+                        <table class="table table-dark" style="table-layout: fixed;">
+                        {% endif %}
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Amount</th>
+                                    <th>Category</th>
+                                    <th>Date</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for transaction in transactions %}
+                                <tr>
+                                    <td class="text-truncate">{{ transaction.title }}</td>
+                                    <td class="{{ transaction.transaction_type }}">
+                                        ${{ transaction.amount }}
+                                    </td>
+                                    <td class="text-truncate"><i class="bi {{ transaction.category|category_icon }}  {{ transaction.category|category_color }}"></i> {{ transaction.get_category }}</td>
+                                    <td class="text-truncate">{{ transaction.created_at|date:"M d, y" }}</td>
+                                    <td>
+                                        <span class="link text-warning edit-button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#transaction-modal"
+                                        data-title="{{ transaction.title }}"
+                                        data-amount="{{ transaction.amount }}"
+                                        data-transaction-type="{{ transaction.transaction_type }}" data-category="{{ transaction.category }}"
+                                        data-edit-url="{% url 'edit_transaction' transaction.id %}" data-delete-url="{% url 'delete_transaction' transaction.id %}">
+                                            <i class="bi bi-pencil-fill"></i>
+                                        </span>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="5">Add a Transaction to Get Started!</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                     <button id="add-button" class="btn btn-success my-3" data-bs-toggle="modal" data-bs-target="#transaction-modal" data-create-url="{% url 'create_transaction' %}">
                         <i class="bi bi-plus"></i> Add Transaction
                     </button>
@@ -136,7 +142,7 @@
 
     <!-- Footer -->
     <footer class="bg-dark">
-        <div class="container-lg p-3">
+        <div class="container-xl p-3">
             <div class="text-center text-light">
                 &copy; Grimsley 2025
             </div>
