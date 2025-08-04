@@ -116,6 +116,7 @@
                     {% if error %}
                     <p class="text-center text-danger">{{error}}</p>
                     {% endif %}
+                    <div class="spinner hidden" id="loading-spinner"></div>
                     <form id="form-one" method="POST" action="{% url 'login' %}#login">
                         {% csrf_token %}
                         <h2>Login</h2>
@@ -225,6 +226,7 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-6">
+                    <div class="spinner hidden" id="loading-spinner"></div>
                     <form>
                         <!-- Email -->
                         <label for="email" class="form-label">Email address:</label>
@@ -279,6 +281,7 @@
         </div>
     </footer>
     <script src="{% static 'js/toggle_form.js' %}"></script>
+    <script src="{% static 'js/spinner.js' %}"></script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
