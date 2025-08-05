@@ -11,3 +11,9 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - loading spinners to landing page authentication form
+
+## 2025-08-04
+
+### Fixed
+
+- form number constraints
