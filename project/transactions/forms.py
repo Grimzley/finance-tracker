@@ -1,5 +1,6 @@
 from django import forms
 from .models import Transaction
+from decimal import Decimal, ROUND_HALF_UP
 
 class TransactionAdminForm(forms.ModelForm):
     class Meta:
@@ -39,6 +40,8 @@ class TransactionForm(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Amount',
                 'min': 0,
+                'max': 1000000,
+                'oninput': 'validateDecimalPlaces(this)'
             }),
             'transaction_type': forms.Select(attrs={
                 'class': 'form-control',
@@ -48,6 +51,11 @@ class TransactionForm(forms.ModelForm):
                 'required': 'required',
             }),
         }
+
+    def clean_amount(self):
+        amount = self.cleaned_data['amount']
+        rounded_amount = amount.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+        return rounded_amount
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
