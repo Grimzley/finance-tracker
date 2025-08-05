@@ -1,10 +1,12 @@
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import TransactionForm
 
 from .models import Transaction
 
+@never_cache
 @login_required
 def transaction_list_view(request):
     transactions = Transaction.objects.filter(user=request.user).order_by('-created_at')

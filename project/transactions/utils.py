@@ -22,7 +22,7 @@ def get_category_color(category):
         'freelance': 'text-palette-grey',
         'investment': 'text-palette-blue',
         'gift': 'text-palette-pink',
-        'inc_other': 'text-palette-one',
+        'inc_other': 'text-palette-five',
 
         'food': 'text-palette-five',
         'bills': 'text-palette-teal',
@@ -31,7 +31,7 @@ def get_category_color(category):
         'entertainment': 'text-palette-orange',
         'health': 'text-palette-red',
         'savings': 'text-palette-pink',
-        'exp_other': 'text-palette-one',
+        'exp_other': 'text-palette-five',
     }.get(category, 'text-palette-five')
 
 def get_category_description(category):
