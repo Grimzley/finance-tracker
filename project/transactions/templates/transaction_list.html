@@ -84,7 +84,7 @@
                                         ${{ transaction.amount }}
                                     </td>
                                     <td class="text-truncate"><i class="bi {{ transaction.category|category_icon }}  {{ transaction.category|category_color }}"></i> {{ transaction.get_category }}</td>
-                                    <td class="text-palette-four text-truncate">{{ transaction.created_at|date:"M d, y" }}</td>
+                                    <td class="text-palette-four text-truncate">{{ transaction.created_at|date:"M d, Y" }}</td>
                                     <td>
                                         <span class="link text-warning edit-button"
                                         data-bs-toggle="modal"

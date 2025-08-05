@@ -70,7 +70,7 @@
                             Saved: <span class="text-palette-five">${{ total.total_savings }}</span>
                         </div>
                         <div class="col-6">
-                            Available: <span class="text-success">${{ total.net_finances }}</span>
+                            Balance: <span class="{% if total.net_finances > 0 %}text-success{% else %}text-danger{% endif %}">${{ total.net_finances }}</span>
                         </div>
                     </div>
                     <div class="row my-3">
@@ -85,7 +85,7 @@
                             Saved: <span class="text-palette-five">${{ summary.total_savings }}</span>
                         </div>
                         <div class="col-6">
-                            Available: <span class="text-success">${{ summary.net_finances }}</span>
+                            Balance: <span class="{% if summary.net_finances > 0 %}text-success{% else %}text-danger{% endif %}">${{ summary.net_finances }}</span>
                         </div>
                     </div>
                     <!-- Transactions -->
@@ -96,7 +96,7 @@
                                 {% for transaction in recent %}
                                 <tr>
                                     <td><i class="bi {{ transaction.category|category_icon }}  {{ transaction.category|category_color }}"></i></td>
-                                    <td class="text-light">{{ transaction.title }}</td>
+                                    <td class="text-light text-truncate">{{ transaction.title }}</td>
                                     {% if transaction.transaction_type == 'income' %}
                                     <td class="text-success">
                                     {% else %}
@@ -155,8 +155,8 @@
                                 <div class="col-md-6">
                                     Saved: <span class="text-palette-five">${{ total.total_savings }}</span>
                                 </div>
-                                <div class="col-md-6">
-                                    Available: <span class="text-success">${{ total.net_finances }}</span>
+                                <div class="col-6">
+                                    Balance: <span class="{% if total.net_finances > 0 %}text-success{% else %}text-danger{% endif %}">${{ total.net_finances }}</span>
                                 </div>
                             </div>
                         </div>
@@ -172,8 +172,8 @@
                                 <div class="col-md-6">
                                     Saved: <span class="text-palette-five">${{ summary.total_savings }}</span>
                                 </div>
-                                <div class="col-md-6">
-                                    Available: <span class="text-success">${{ summary.net_finances }}</span>
+                                <div class="col-6">
+                                    Balance: <span class="{% if summary.net_finances > 0 %}text-success{% else %}text-danger{% endif %}">${{ summary.net_finances }}</span>
                                 </div>
                             </div>
                         </div>
@@ -189,10 +189,10 @@
                             </button>
                         </div>
                     </div>
-                    <div class="row justify-content-center align-items-center text-dark">
+                    <div class="row justify-content-center align-items-stretch text-dark">
                         {% for budget in budgets %}
-                        <div class="col-sm-7 col-md-5 col-lg-3">
-                            <div class="card bg-palette-two border-palette-five text-light">
+                        <div class="col-sm-7 col-md-5 col-lg-3 my-3">
+                            <div class="card bg-palette-two border-palette-five text-light h-100">
                                 <div class="card-body text-center">
                                     <i style="font-size: 2em;" class="bi {{ budget.category|category_icon }} {{ budget.category|category_color }}"></i>
                                     <div class="card-title text-palette-five">
@@ -200,7 +200,7 @@
                                         {% if budget.remaining is None %}
                                             Unlimited
                                         {% else %}
-                                            {{ budget.limit }}
+                                            ${{ budget.limit }}
                                         {% endif %}
                                     </div>
                                     <div class="card-text text-palette-five">Spent: ${{ budget.spent }}</div>

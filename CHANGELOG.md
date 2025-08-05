@@ -14,13 +14,18 @@ All notable changes to this project will be documented in this file.
 
 ## 2025-08-04
 
+### Added
+
+- get started and login buttons activate appropriate forms
+
 ### Changed
 
 - sticky nav and footer
 - nav button scroll adjusted to navbar
-- get started and login buttons activates appropriate forms
+- text formatting and colors
 
 ### Fixed
 
 - form number constraints
 - removed caching from authenticated pages
+- budget ordering and size
