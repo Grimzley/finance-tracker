@@ -17,6 +17,8 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - sticky nav and footer
+- nav button scroll adjusted to navbar
+- get started and login buttons activates appropriate forms
 
 ### Fixed
 

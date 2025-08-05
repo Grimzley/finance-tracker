@@ -16,7 +16,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-md fixed-top bg-palette-one navbar-dark">
         <div class="container-lg">
-            <a href="#hero" class="navbar-brand">
+            <a href="#hero" class="navbar-brand" data-scroll>
                 <h1 class="fw-bold text-success">
                     BalancedBudget
                     <i class="bi bi-bank2"></i>
@@ -28,19 +28,19 @@
             <div class="collapse navbar-collapse justify-content-end" id="main-nav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a href="#features" class="nav-link">Features</a>
+                        <a href="#features" class="nav-link" data-scroll>Features</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#reviews" class="nav-link">Reviews</a>
+                        <a href="#reviews" class="nav-link" data-scroll>Reviews</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#contact" class="nav-link">Contact</a>
+                        <a href="#contact" class="nav-link" data-scroll>Contact</a>
                     </li>
                     <li class="nav-item d-md-none">
-                        <a href="#login" class="nav-link">Login</a>
+                        <a href="#login" class="nav-link show-form-one" data-scroll>Login</a>
                     </li>
                     <li class="nav-item ms-2 d-none d-md-inline">
-                        <a href="#login" class="btn btn-secondary">Login</a>
+                        <a href="#login" class="btn btn-secondary show-form-one" data-scroll>Login</a>
                     </li>
                 </ul>
             </div>
@@ -48,7 +48,7 @@
     </nav>
 
     <!-- Intro -->
-    <section id="hero">
+    <section id="hero" class="bg-white">
         <div class="container-lg">
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-5 text-center text-md-start">
@@ -56,7 +56,7 @@
                     <p class="lead text-muted">
                         Track spending, set budgets, and visualize your financial health in one simple dashboard.
                     </p>
-                    <a href="#login" class="btn btn-lg btn-secondary">Get Started</a>
+                    <a href="#login" class="btn btn-lg btn-secondary show-form-two" data-scroll>Get Started</a>
                 </div>
                 <div class="col-md-5 text-center d-none d-md-block">
                     <img class="img-fluid shadow-lg" src="{% static 'images/dashboard.png' %}" alt="Dashboard">
@@ -105,7 +105,7 @@
     </section>
 
     <!-- Login/Register -->
-    <section id="login">
+    <section id="login" class="bg-white">
         <div class="container-lg">
             <div class="text-center">
                 <h1 class="display-6">Take Control of Your Finances</h1>
@@ -116,7 +116,7 @@
                     {% if error %}
                     <p class="text-center text-danger">{{error}}</p>
                     {% endif %}
-                    <div class="spinner hidden" id="loading-spinner"></div>
+                    <div class="spinner d-none" id="loading-spinner"></div>
                     <form id="form-one" method="POST" action="{% url 'login' %}#login">
                         {% csrf_token %}
                         <h2>Login</h2>
@@ -124,17 +124,17 @@
                         <input class="form-control" type="text" name="username" placeholder="Username" required/>
                         <input class="form-control" type="password" name="password" placeholder="Password" required/>
                         <button class="btn btn-success" type="submit">Login</button>
-                        <p>Don't have an account? <span id="show-form-two" class="link text-primary text-decoration-underline">Register Here</span></p>
+                        <p>Don't have an account? <span class="link text-primary text-decoration-underline show-form-two">Register Here</span></p>
                     </form>
                     <!-- Register Form -->
-                    <form id="form-two" class="hidden" method="POST" action="{% url 'register' %}#login">
+                    <form id="form-two" class="d-none" method="POST" action="{% url 'register' %}#login">
                         {% csrf_token %}
                         <h2>Register</h2>
                         {{form.username}}
                         {{form.password}}
                         {{form.password_confirm}}
                         <button class="btn btn-success" type="submit">Create Account</button>
-                        <p>Have an account? <span id="show-form-one" class="link text-primary text-decoration-underline">Login Here</span></p>
+                        <p>Have an account? <span class="link text-primary text-decoration-underline show-form-one">Login Here</span></p>
                     </form>
                 </div>
             </div>
@@ -221,7 +221,7 @@
     </section>
 
     <!-- Contact -->
-    <section id="contact">
+    <section id="contact" class="bg-white">
         <div class="container-lg">
             <div class="text-center">
                 <h2><i class="bi bi-phone"></i>Get in Touch</h2>
@@ -229,7 +229,6 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-6">
-                    <div class="spinner hidden" id="loading-spinner"></div>
                     <form>
                         <!-- Email -->
                         <label for="email" class="form-label">Email address:</label>
@@ -283,6 +282,7 @@
             </div>
         </div>
     </footer>
+    <script src="{% static 'js/scroll.js' %}"></script>
     <script src="{% static 'js/toggle_form.js' %}"></script>
     <script src="{% static 'js/spinner.js' %}"></script>
     <!-- Bootstrap JS -->
