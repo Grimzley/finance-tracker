@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
 from datetime import date, timedelta
 
 from .forms import RegisterForm
@@ -51,6 +52,7 @@ def logout_view(request):
         logout(request)
     return redirect('dashboard')
 
+@never_cache
 @login_required
 def dashboard_view(request):
     recent = Transaction.objects.filter(user=request.user).order_by('-created_at')[:7]
@@ -69,6 +71,7 @@ def dashboard_view(request):
     
     return render(request, 'dashboard.html', {'recent': recent, 'form': form, 'budgets': budgets, 'formset': formset, 'summary': summary, 'total': total, 'past': past})
 
+@never_cache
 @login_required
 def settings_view(request):
     return render(request, 'settings.html')

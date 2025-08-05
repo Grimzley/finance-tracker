@@ -17,3 +17,4 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - form number constraints
+- removed caching from authenticated pages
