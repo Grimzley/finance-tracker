@@ -14,6 +14,10 @@ All notable changes to this project will be documented in this file.
 
 ## 2025-08-04
 
+### Changed
+
+- sticky nav and footer
+
 ### Fixed
 
 - form number constraints

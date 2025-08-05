@@ -1,5 +1,6 @@
-html {
+body {
   background-color: #17171c;
+  padding: 100px 0;
 }
 
 .card {
