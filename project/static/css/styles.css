@@ -1,10 +1,5 @@
-/* Temp Fixes */
 html {
   background-color: #17171c;
-}
-button:focus {
-    outline: none !important;
-    box-shadow: none !important;
 }
 
 .card {
@@ -38,7 +33,6 @@ section {
   display: none;
 }
 
-
 /* Dashboard Styles */
 .modal .form-control, .modal .input-group-text {
   margin: 10px 0;
@@ -47,4 +41,9 @@ section {
 /* Transaction List Styles */
 td.text-truncate {
   max-width: 100px;
+}
+
+button:focus {
+    outline: none !important;
+    box-shadow: none !important;
 }
