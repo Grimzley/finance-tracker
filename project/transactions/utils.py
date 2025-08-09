@@ -8,9 +8,9 @@ def get_category_icon(category):
 
         'food': 'bi-fork-knife',
         'bills': 'bi-house-exclamation-fill',
-        'transport': 'bi-luggage-fill',
-        'shopping': 'bi-cart-fill',
-        'entertainment': 'bi-joystick',
+        'transport': 'bi-car-front-fill',
+        'shopping': 'bi-cart4',
+        'entertainment': 'bi-controller',
         'health': 'bi-heart-pulse-fill',
         'savings': 'bi-piggy-bank-fill',
         'exp_other': 'bi-three-dots',
