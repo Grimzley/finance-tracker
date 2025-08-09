@@ -16,7 +16,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- get started and login buttons activate appropriate forms
+- Get Started and Login buttons activate appropriate forms
 
 ### Changed
 
@@ -40,3 +40,10 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - Docker race condition
+
+## 2025-08-09
+
+### Added
+
+- user settings
+- username and password change, account deactivation
