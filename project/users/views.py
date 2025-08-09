@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
 from django.views.decorators.cache import never_cache
 from datetime import date, timedelta
 
 from .forms import RegisterForm
 from transactions.forms import TransactionForm
 from budgets.forms import BudgetFormSet
+from django.contrib.auth.forms import PasswordChangeForm
 
 from django.contrib.auth.models import User
 from transactions.models import Transaction
@@ -74,5 +76,61 @@ def dashboard_view(request):
 @never_cache
 @login_required
 def settings_view(request):
-    return render(request, 'settings.html')
-    
+    user = request.user
+    password_form = PasswordChangeForm(user=user)
+    message = None
+    password_form.fields['old_password'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Old Password'})
+    password_form.fields['new_password1'].widget.attrs.update({'class': 'form-control', 'placeholder': 'New Password'})
+    password_form.fields['new_password2'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Confirm New Password'})
+    return render(request, 'settings.html', {'current_username': user.username, 'password_form': password_form, 'username_message': message})
+
+@never_cache
+@login_required
+def change_username_view(request):
+    user = request.user
+    password_form = PasswordChangeForm(user=user)
+    message = None
+    if request.method == 'POST':
+        new_username = request.POST.get('username', '').strip()
+        if not new_username:
+            message = "Username cannot be empty."
+        elif User.objects.filter(username=new_username).exclude(pk=user.pk).exists():
+            message = "This username is already taken."
+        else:
+            user.username = new_username
+            user.save()
+            return redirect('dashboard')
+    password_form.fields['old_password'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Old Password'})
+    password_form.fields['new_password1'].widget.attrs.update({'class': 'form-control', 'placeholder': 'New Password'})
+    password_form.fields['new_password2'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Confirm New Password'})
+    return render(request, 'settings.html', {'current_username': user.username, 'password_form': password_form, 'username_message': message, 'password_message': None})
+
+@never_cache
+@login_required
+def change_password_view(request):
+    user = request.user
+    password_form = PasswordChangeForm(user=user)
+    message = None
+    if request.method == 'POST':
+        password_form = PasswordChangeForm(user=user, data=request.POST)
+        if password_form.is_valid():
+            user = password_form.save()
+            update_session_auth_hash(request, user)
+            return redirect('dashboard')
+        else:
+            message = "Invalid Credentials!"
+    password_form.fields['old_password'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Old Password'})
+    password_form.fields['new_password1'].widget.attrs.update({'class': 'form-control', 'placeholder': 'New Password'})
+    password_form.fields['new_password2'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Confirm New Password'})
+    return render(request, 'settings.html', {'current_username': user.username, 'password_form': password_form, 'username_message': None, 'password_message': message})
+
+@never_cache
+@login_required
+def delete_user_view(request):
+    if request.method == 'POST':
+        user = request.user
+        user.is_active = False
+        user.save()
+        logout(request)
+        return redirect('dashboard')
+    return redirect('settings')

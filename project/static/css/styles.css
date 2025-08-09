@@ -1,10 +1,10 @@
 body {
   background-color: #17171c;
-  padding-top: 80px;
+  padding-top: 85px;
   padding-bottom: 40px;
 }
 
-.card {
+main .form-control, .card {
   margin: 10px 0;
 }
 

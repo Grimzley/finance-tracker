@@ -40,6 +40,7 @@ class TransactionFormTest(TestCase):
             'category': 'food',
         }
         response = self.client.post('/transactions/add/', data=form_data)
+        self.assertFalse(Transaction.objects.filter(title='Hotpot').exists())
         self.assertRedirects(response, expected_url="/login/?next=/transactions/add/")
 
     def test_edit_transaction(self):
@@ -63,6 +64,8 @@ class TransactionFormTest(TestCase):
             'category': 'food',
         }
         response = self.client.post(f'/transactions/{self.transaction.id}/edit/', data=form_data)
+        self.transaction.refresh_from_db()
+        self.assertNotEqual(self.transaction.title, 'Thang Thang')
         self.assertRedirects(response, expected_url=f"/login/?next=/transactions/{self.transaction.id}/edit/")
 
     def test_delete_transaction(self):
@@ -73,4 +76,5 @@ class TransactionFormTest(TestCase):
 
     def test_delete_transaction_redirects_unauthenticated_user(self):
         response = self.client.post(f'/transactions/{self.transaction.id}/delete/')
+        self.assertTrue(Transaction.objects.exists())
         self.assertRedirects(response, expected_url=f"/login/?next=/transactions/{self.transaction.id}/delete/")
