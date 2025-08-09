@@ -1,6 +1,7 @@
 from django import forms
 from .models import Transaction
 from decimal import Decimal, ROUND_HALF_UP
+from django.core.exceptions import ValidationError
 
 class TransactionAdminForm(forms.ModelForm):
     class Meta:
@@ -54,6 +55,10 @@ class TransactionForm(forms.ModelForm):
 
     def clean_amount(self):
         amount = self.cleaned_data['amount']
+        if amount < 0:
+            raise ValidationError("Amount cannot be negative")
+        elif amount > 1_000_000:
+            raise ValidationError("Amount cannot be greater than $1,000,000")
         rounded_amount = amount.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
         return rounded_amount
 
@@ -61,3 +66,4 @@ class TransactionForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         self.fields['category'].choices= [('', 'Select transaction type first')]
+        

@@ -29,3 +29,14 @@ All notable changes to this project will be documented in this file.
 - form number constraints
 - removed caching from authenticated pages
 - budget ordering and size
+
+## 2025-08-08
+
+### Added
+
+- transaction tests
+- ci workflow
+
+### Fixed
+
+- Docker race condition
