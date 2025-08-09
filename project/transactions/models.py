@@ -24,6 +24,14 @@ class Transaction(models.Model):
         SAVINGS = 'savings', 'Savings'
         OTHER = 'exp_other', 'Other'
 
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                condition = models.Q(amount__gte=0) & models.Q(amount__lte=1_000_000),
+                name = 'amount_range_condition'
+            )
+        ]
+
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
@@ -40,7 +48,7 @@ class Transaction(models.Model):
         else:
             category_dict = dict(self.ExpenseCategory.choices)
         return category_dict.get(self.category, self.category)
-    
+
     def clean(self):
         super().clean()
         valid_categories = (

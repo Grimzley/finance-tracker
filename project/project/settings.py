@@ -1,5 +1,4 @@
 import os
-from django.core.exceptions import ImproperlyConfigured
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
