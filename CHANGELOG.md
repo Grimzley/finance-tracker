@@ -55,7 +55,7 @@ All notable changes to this project will be documented in this file.
 - category icons
 - improved error feedback
 
-## 2025-08-09
+## 2025-08-10
 
 ### Added
 
@@ -69,3 +69,4 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - login/register display
+- progress bar division by zero

@@ -68,14 +68,10 @@ def logout_view(request):
 @never_cache
 @login_required
 def dashboard_view(request):
-    recent = Transaction.objects.filter(user=request.user).order_by('-created_at')[:7]
+    recent = Transaction.objects.filter(user=request.user).order_by('-created_at')[:10]
     form = TransactionForm()
     budgets = get_monthly_budget_summary(request.user)
     formset = BudgetFormSet(queryset=Budget.objects.filter(user=request.user))
-    budget_labels = ["Food", "Bills", "Transportation", "Shopping", "Entertainment", "Healthcare", "Savings", "Other"]
-    budget_data = []
-    for budget in budgets:
-        budget_data.append(float(budget['progress']))
 
     today = date.today()
     total = get_total_summary(request.user)
@@ -85,6 +81,13 @@ def dashboard_view(request):
         summary = get_monthly_summary(request.user, first_day)
         past.append(summary)
     summary = past.pop(0)
+
+    budget_labels = ["Food", "Bills", "Transportation", "Shopping", "Entertainment", "Healthcare", "Savings", "Other"]
+    this_month = []
+    last_month = [10, 100, 90, 80, 100, 50, 20, 30]
+    for budget in budgets:
+        this_month.append(float(budget['progress']))
+
     context = {
         'recent': recent,
         'form': form,
@@ -94,7 +97,8 @@ def dashboard_view(request):
         'total': total,
         'past': past,
         'budget_labels': json.dumps(budget_labels),
-        'budget_data': json.dumps(budget_data)
+        'this_month_data': json.dumps(this_month),
+        'last_month_data': json.dumps(last_month),
     }
     return render(request, 'dashboard.html', context)
 
