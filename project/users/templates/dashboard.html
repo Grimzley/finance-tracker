@@ -223,6 +223,16 @@
                         </div>
                         {% endfor %}
                     </div>
+                    <!-- Budget Radar Chart -->
+                    <div class="row justify-content-center">
+                        <div style="max-width: 500px;">
+                            <canvas id="budget-radar"
+                                data-labels='{{ budget_labels|safe }}'
+                                data-this-month='{{ this_month_data|safe }}'
+                                data-last-month='{{ last_month_data|safe }}'>
+                            </canvas>
+                        </div>
+                    </div>
                     <!-- Reports -->
                     <div class="row align-items-center border-bottom mt-3">
                         <div class="col-md-4 text-center text-md-start">
@@ -260,15 +270,6 @@
                             </div>
                         </div>
                         {% endfor %}
-                    </div>
-                </div>
-                <!-- Charts -->
-                <div class="row justify-content-center">
-                    <div style="max-width: 500px;">
-                        <canvas id="budget-radar"
-                            data-labels='{{ budget_labels|safe }}'
-                            data-values='{{ budget_data|safe }}'>
-                        </canvas>
                     </div>
                 </div>
             </div>
