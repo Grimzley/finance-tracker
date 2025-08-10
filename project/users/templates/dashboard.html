@@ -96,7 +96,7 @@
                                 {% for transaction in recent %}
                                 <tr>
                                     <td><i class="bi {{ transaction.category|category_icon }}  {{ transaction.category|category_color }}"></i></td>
-                                    <td class="text-light text-truncate">{{ transaction.title }}</td>
+                                    <td class="tt text-light text-truncate " data-bs-placement="top" title="{{ transaction.title }}">{{ transaction.title }}</td>
                                     {% if transaction.transaction_type == 'income' %}
                                     <td class="text-success">
                                     {% else %}

@@ -113,13 +113,13 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <!-- Login Form -->
-                    {% if error %}
-                    <p class="text-center text-danger">{{error}}</p>
-                    {% endif %}
                     <div class="spinner d-none" id="loading-spinner"></div>
-                    <form id="form-one" method="POST" action="{% url 'login' %}#login">
+                    <form id="form-one" class="{% if register_error %}d-none{% endif %}" method="POST" action="{% url 'login' %}#login">
                         {% csrf_token %}
                         <h2>Login</h2>
+                        {% if login_error %}
+                        <p class="text-center text-danger">{{login_error}}</p>
+                        {% endif %}
                         <input type="hidden" name="next" value="{{ request.GET.next }}">
                         <input class="form-control" type="text" name="username" placeholder="Username" required/>
                         <input class="form-control" type="password" name="password" placeholder="Password" required/>
@@ -127,9 +127,16 @@
                         <p>Don't have an account? <span class="link text-primary text-decoration-underline show-form-two">Register Here</span></p>
                     </form>
                     <!-- Register Form -->
-                    <form id="form-two" class="d-none" method="POST" action="{% url 'register' %}#login">
+                    <form id="form-two" class="{% if login_error %}d-none{% endif %}" method="POST" action="{% url 'register' %}#login">
                         {% csrf_token %}
                         <h2>Register</h2>
+                        {% if register_error.errors.username %}
+                        <p class="text-center text-danger">{{register_error.errors.username.0}}</p>
+                        {% elif register_error.errors.password %}
+                        <p class="text-center text-danger">{{register_error.errors.password.0}}</p>
+                        {% elif register_error.non_field_errors %}
+                        <p class="text-center text-danger">{{register_error.non_field_errors.0}}</p>
+                        {% endif %}
                         {{form.username}}
                         {{form.password}}
                         {{form.password_confirm}}
@@ -251,7 +258,7 @@
                         </div>
 
                         <div class="text-center">
-                            <button class="btn btn-secondary" type="submit" disabled="true">Submit</button>
+                            <button class="btn btn-secondary" type="submit">Submit</button>
                         </div>
                     </form>
                 </div>

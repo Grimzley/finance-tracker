@@ -4,16 +4,20 @@ body {
   padding-bottom: 40px;
 }
 
-main .form-control, .card {
+main .form-control, #login .form-control, .modal .form-control, .modal .input-group-text, .card {
   margin: 10px 0;
+}
+td.text-truncate {
+  max-width: 100px;
+}
+button:focus {
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 /* Landing Page Styles */
 section {
   padding: 60px 0;
-}
-#login .form-control {
-  margin: 10px 0;
 }
 .link {
   cursor: pointer;
@@ -30,19 +34,4 @@ section {
 @keyframes spin {
   0% {transform: rotate(0deg);}
   100% {transform: rotate(360deg);}
-}
-
-/* Dashboard Styles */
-.modal .form-control, .modal .input-group-text {
-  margin: 10px 0;
-}
-
-/* Transaction List Styles */
-td.text-truncate {
-  max-width: 100px;
-}
-
-button:focus {
-    outline: none !important;
-    box-shadow: none !important;
 }

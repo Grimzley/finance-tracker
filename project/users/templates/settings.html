@@ -54,7 +54,7 @@
     <main class="bg-palette-one">
         <div class="container-xl">
             <div class="row justify-content-center align-items-center">
-                <div class="col-lg-4">
+                <div class="col-md-4">
                     <h1 class="display-4 text-light mb-5 text-center">Settings</h1>
                     <form method="POST" action="{% url 'change_username' %}">
                         {% csrf_token %}
@@ -95,7 +95,8 @@
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+                    <p>Are you sure you want to delete your account?</p>
+                    <p>This action cannot be undone.</p>
                 </div>
                 <div class="modal-footer">
                     <form class="px-5" method="POST" action="{% url 'delete_user' %}">

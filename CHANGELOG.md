@@ -47,3 +47,10 @@ All notable changes to this project will be documented in this file.
 
 - user settings
 - username and password change, account deactivation
+- recent transaction title tooltip
+- register validation
+
+### Changed
+
+- category icons
+- improved error feedback

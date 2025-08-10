@@ -30,9 +30,9 @@ def register_view(request):
                 Budget.objects.create(user=user, category=category, limit=0)
             return redirect('dashboard')
         else:
-            error_message = "Invalid Credentials!"
+            error_message = form
     form = RegisterForm()
-    return render(request, 'landing.html', {'error': error_message, 'form': form})
+    return render(request, 'landing.html', {'register_error': error_message, 'login_error': None, 'form': form})
 
 def login_view(request):
     error_message = None
@@ -45,9 +45,9 @@ def login_view(request):
             next_url = request.POST.get('next') or request.GET.get('next') or 'dashboard'
             return redirect(next_url)
         else:
-            error_message = "Invalid Credentials!"
+            error_message = "Incorrect username/password"
     form = RegisterForm()
-    return render(request, 'landing.html', {'error': error_message, 'form': form})
+    return render(request, 'landing.html', {'register_error': None, 'login_error': error_message, 'form': form})
 
 def logout_view(request):
     if request.method == "POST":
