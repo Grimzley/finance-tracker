@@ -59,7 +59,9 @@ jobs:
           done
 
       - name: Run migrations
-        run: python project/manage.py migrate
+        working-directory: project
+        run: python manage.py migrate
 
       - name: Run tests
-        run: python project/manage.py test
+        working-directory: project
+        run: python manage.py test

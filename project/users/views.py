@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
 from django.views.decorators.cache import never_cache
 from datetime import date, timedelta
+import json
 
 from .forms import RegisterForm
 from transactions.forms import TransactionForm
@@ -32,7 +33,12 @@ def register_view(request):
         else:
             error_message = form
     form = RegisterForm()
-    return render(request, 'landing.html', {'register_error': error_message, 'login_error': None, 'form': form})
+    context = {
+        'register_error': error_message,
+        'login_error': None,
+        'form': form
+    }
+    return render(request, 'landing.html', context)
 
 def login_view(request):
     error_message = None
@@ -47,7 +53,12 @@ def login_view(request):
         else:
             error_message = "Incorrect username/password"
     form = RegisterForm()
-    return render(request, 'landing.html', {'register_error': None, 'login_error': error_message, 'form': form})
+    context = {
+        'register_error': None,
+        'login_error': error_message,
+        'form': form
+    }
+    return render(request, 'landing.html', context)
 
 def logout_view(request):
     if request.method == "POST":
@@ -61,6 +72,10 @@ def dashboard_view(request):
     form = TransactionForm()
     budgets = get_monthly_budget_summary(request.user)
     formset = BudgetFormSet(queryset=Budget.objects.filter(user=request.user))
+    budget_labels = ["Food", "Bills", "Transportation", "Shopping", "Entertainment", "Healthcare", "Savings", "Other"]
+    budget_data = []
+    for budget in budgets:
+        budget_data.append(float(budget['progress']))
 
     today = date.today()
     total = get_total_summary(request.user)
@@ -70,19 +85,34 @@ def dashboard_view(request):
         summary = get_monthly_summary(request.user, first_day)
         past.append(summary)
     summary = past.pop(0)
-    
-    return render(request, 'dashboard.html', {'recent': recent, 'form': form, 'budgets': budgets, 'formset': formset, 'summary': summary, 'total': total, 'past': past})
+    context = {
+        'recent': recent,
+        'form': form,
+        'budgets': budgets,
+        'formset': formset,
+        'summary': summary,
+        'total': total,
+        'past': past,
+        'budget_labels': json.dumps(budget_labels),
+        'budget_data': json.dumps(budget_data)
+    }
+    return render(request, 'dashboard.html', context)
 
 @never_cache
 @login_required
 def settings_view(request):
     user = request.user
     password_form = PasswordChangeForm(user=user)
-    message = None
     password_form.fields['old_password'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Old Password'})
     password_form.fields['new_password1'].widget.attrs.update({'class': 'form-control', 'placeholder': 'New Password'})
     password_form.fields['new_password2'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Confirm New Password'})
-    return render(request, 'settings.html', {'current_username': user.username, 'password_form': password_form, 'username_message': message})
+    context = {
+        'current_username': user.username,
+        'password_form': password_form,
+        'username_message': None,
+        'password_message': None
+    }
+    return render(request, 'settings.html', context)
 
 @never_cache
 @login_required
@@ -103,7 +133,13 @@ def change_username_view(request):
     password_form.fields['old_password'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Old Password'})
     password_form.fields['new_password1'].widget.attrs.update({'class': 'form-control', 'placeholder': 'New Password'})
     password_form.fields['new_password2'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Confirm New Password'})
-    return render(request, 'settings.html', {'current_username': user.username, 'password_form': password_form, 'username_message': message, 'password_message': None})
+    context = {
+        'current_username': user.username,
+        'password_form': password_form,
+        'username_message': message, 
+        'password_message': None
+    }
+    return render(request, 'settings.html', context)
 
 @never_cache
 @login_required
@@ -118,11 +154,17 @@ def change_password_view(request):
             update_session_auth_hash(request, user)
             return redirect('dashboard')
         else:
-            message = "Invalid Credentials!"
+            message = "Incorrect password."
     password_form.fields['old_password'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Old Password'})
     password_form.fields['new_password1'].widget.attrs.update({'class': 'form-control', 'placeholder': 'New Password'})
     password_form.fields['new_password2'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Confirm New Password'})
-    return render(request, 'settings.html', {'current_username': user.username, 'password_form': password_form, 'username_message': None, 'password_message': message})
+    context = {
+        'current_username': user.username,
+        'password_form': password_form,
+        'username_message': None,
+        'password_message': message
+    }
+    return render(request, 'settings.html', context)
 
 @never_cache
 @login_required

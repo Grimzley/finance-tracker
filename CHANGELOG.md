@@ -54,3 +54,18 @@ All notable changes to this project will be documented in this file.
 
 - category icons
 - improved error feedback
+
+## 2025-08-09
+
+### Added
+
+- budget progress bars
+- budget radar chart
+
+### Changed
+
+- cleaned view context
+
+### Fixed
+
+- login/register display

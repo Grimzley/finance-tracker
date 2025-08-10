@@ -10,10 +10,6 @@ main .form-control, #login .form-control, .modal .form-control, .modal .input-gr
 td.text-truncate {
   max-width: 100px;
 }
-button:focus {
-    outline: none !important;
-    box-shadow: none !important;
-}
 
 /* Landing Page Styles */
 section {
