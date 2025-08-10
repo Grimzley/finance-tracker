@@ -70,3 +70,4 @@ All notable changes to this project will be documented in this file.
 
 - login/register display
 - progress bar division by zero
+- serve static files when debug is off
