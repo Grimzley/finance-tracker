@@ -127,7 +127,7 @@
                         <p>Don't have an account? <span class="link text-primary text-decoration-underline show-form-two">Register Here</span></p>
                     </form>
                     <!-- Register Form -->
-                    <form id="form-two" class="{% if login_error %}d-none{% endif %}" method="POST" action="{% url 'register' %}#login">
+                    <form id="form-two" class="{% if login_error or login_error is None and register_error is None %}d-none{% endif %}" method="POST" action="{% url 'register' %}#login">
                         {% csrf_token %}
                         <h2>Register</h2>
                         {% if register_error.errors.username %}

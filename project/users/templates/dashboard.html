@@ -193,6 +193,11 @@
                         {% for budget in budgets %}
                         <div class="col-sm-7 col-md-5 col-lg-3 my-3">
                             <div class="card bg-palette-two border-palette-five text-light h-100">
+                                <div class="card-header">
+                                    <div class="progress">
+                                        <div class="progress-bar {% if budget.progress < 70 %}bg-success{% elif budget.progress < 90%}bg-warning{% else %}bg-danger{% endif %}" role="progressbar" style="width:{{ budget.progress }}%"></div>
+                                    </div>
+                                </div>
                                 <div class="card-body text-center">
                                     <i style="font-size: 2em;" class="bi {{ budget.category|category_icon }} {{ budget.category|category_color }}"></i>
                                     <div class="card-title text-palette-five">
@@ -206,10 +211,10 @@
                                     <div class="card-text text-palette-five">Spent: ${{ budget.spent }}</div>
                                     {% if budget.remaining is not None %}
                                         <div class="card-text lead fw-bold">
-                                            {% if budget.remaining < 0 %}
-                                                <span class="text-danger">${{ budget.remaining }}</span>
-                                            {% else %}
+                                            {% if budget.remaining > 0 %}
                                                 <span class="text-success">${{ budget.remaining }}</span>
+                                            {% else %}
+                                                <span class="text-danger">${{ budget.remaining }}</span>
                                             {% endif %}
                                         </div>
                                     {% endif %}

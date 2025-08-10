@@ -27,6 +27,7 @@ def get_monthly_budget_summary(user):
             'limit': budget.limit,
             'spent': spent,
             'remaining': remaining,
+            'progress': (spent / budget.limit) * 100
         })
 
     return summary

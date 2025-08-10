@@ -78,11 +78,10 @@ def dashboard_view(request):
 def settings_view(request):
     user = request.user
     password_form = PasswordChangeForm(user=user)
-    message = None
     password_form.fields['old_password'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Old Password'})
     password_form.fields['new_password1'].widget.attrs.update({'class': 'form-control', 'placeholder': 'New Password'})
     password_form.fields['new_password2'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Confirm New Password'})
-    return render(request, 'settings.html', {'current_username': user.username, 'password_form': password_form, 'username_message': message})
+    return render(request, 'settings.html', {'current_username': user.username, 'password_form': password_form, 'username_message': None, 'password_message': None})
 
 @never_cache
 @login_required
@@ -118,7 +117,7 @@ def change_password_view(request):
             update_session_auth_hash(request, user)
             return redirect('dashboard')
         else:
-            message = "Invalid Credentials!"
+            message = "Incorrect password."
     password_form.fields['old_password'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Old Password'})
     password_form.fields['new_password1'].widget.attrs.update({'class': 'form-control', 'placeholder': 'New Password'})
     password_form.fields['new_password2'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Confirm New Password'})
