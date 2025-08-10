@@ -60,6 +60,11 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - budget progress bars
+- budget radar chart
+
+### Changed
+
+- cleaned view context
 
 ### Fixed
 

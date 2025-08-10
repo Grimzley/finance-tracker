@@ -155,7 +155,7 @@
                                 <div class="col-md-6">
                                     Saved: <span class="text-palette-five">${{ total.total_savings }}</span>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-md-6">
                                     Balance: <span class="{% if total.net_finances > 0 %}text-success{% else %}text-danger{% endif %}">${{ total.net_finances }}</span>
                                 </div>
                             </div>
@@ -172,7 +172,7 @@
                                 <div class="col-md-6">
                                     Saved: <span class="text-palette-five">${{ summary.total_savings }}</span>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-md-6">
                                     Balance: <span class="{% if summary.net_finances > 0 %}text-success{% else %}text-danger{% endif %}">${{ summary.net_finances }}</span>
                                 </div>
                             </div>
@@ -262,6 +262,15 @@
                         {% endfor %}
                     </div>
                 </div>
+                <!-- Charts -->
+                <div class="row justify-content-center">
+                    <div style="max-width: 500px;">
+                        <canvas id="budget-radar"
+                            data-labels='{{ budget_labels|safe }}'
+                            data-values='{{ budget_data|safe }}'>
+                        </canvas>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -336,7 +345,10 @@
     <script src="{% static 'js/transaction.js' %}"></script>
     <script src="{% static 'js/validate.js' %}"></script>
     <script src="{% static 'js/tooltips.js' %}"></script>
+    <script src="{% static 'js/radar.js' %}"></script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- Chart JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>
