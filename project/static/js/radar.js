@@ -33,11 +33,19 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         options: {
             responsive: true,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: "#fff",
+                    },
+                },
+            },
             scales: {
                 r: {
-                    angleLines: { color: '#ccc' },
-                    grid: { color: '#ccc' },
+                    angleLines: { color: '#fff' },
+                    grid: { color: '#fff' },
                     ticks: { display: false },
+                    pointLabels: { color: '#fff' },
                     suggestedMin: 0,
                     suggestedMax: 100
                 }

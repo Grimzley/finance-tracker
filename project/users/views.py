@@ -68,12 +68,15 @@ def logout_view(request):
 @never_cache
 @login_required
 def dashboard_view(request):
+    today = date.today()
+    last_month_date = (today.replace(day=1) - timedelta(days=30)).replace(day=1)
+
     recent = Transaction.objects.filter(user=request.user).order_by('-created_at')[:10]
     form = TransactionForm()
     budgets = get_monthly_budget_summary(request.user)
+    budgets_last_month = get_monthly_budget_summary(request.user, last_month_date)
     formset = BudgetFormSet(queryset=Budget.objects.filter(user=request.user))
 
-    today = date.today()
     total = get_total_summary(request.user)
     past = []
     for i in range(5):
@@ -83,10 +86,25 @@ def dashboard_view(request):
     summary = past.pop(0)
 
     budget_labels = ["Food", "Bills", "Transportation", "Shopping", "Entertainment", "Healthcare", "Savings", "Other"]
-    this_month = []
-    last_month = [80, 100, 30, 50, 75, 50, 100, 20]
+    this_month_progress = []
+    this_month_spent = []
+    last_month_progress = []
     for budget in budgets:
-        this_month.append(float(budget['progress']))
+        this_month_progress.append(float(budget['progress']))
+        this_month_spent.append(float(budget['spent']))
+    for budget in budgets_last_month:
+        last_month_progress.append(float(budget['progress']))
+
+    months = [summary['month'].strftime('%b')]
+    income = [float(summary['total_income'])]
+    saved = [float(summary['total_savings'])]
+    expenses = [float(summary['total_expenses'])]
+
+    for month in past:
+        months.append(month['month'].strftime('%b'))
+        income.append(float(month['total_income']))
+        saved.append(float(month['total_savings']))
+        expenses.append(float(month['total_expenses']))
 
     context = {
         'recent': recent,
@@ -97,8 +115,13 @@ def dashboard_view(request):
         'total': total,
         'past': past,
         'budget_labels': json.dumps(budget_labels),
-        'this_month_data': json.dumps(this_month),
-        'last_month_data': json.dumps(last_month),
+        'this_month_data': json.dumps(this_month_progress),
+        'last_month_data': json.dumps(last_month_progress),
+        'this_month_spent': json.dumps(this_month_spent),
+        'months': json.dumps(months),
+        'income': json.dumps(income),
+        'saved': json.dumps(saved),
+        'expenses': json.dumps(expenses),
     }
     return render(request, 'dashboard.html', context)
 

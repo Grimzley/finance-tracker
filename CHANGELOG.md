@@ -70,3 +70,27 @@ All notable changes to this project will be documented in this file.
 
 - login/register display
 - progress bar division by zero
+
+## 2025-08-11
+
+### Added
+
+- budget pie chart
+
+### Changed
+
+- updated feature images
+
+## 2025-08-12
+
+### Added
+
+- income vs expense bar chart
+
+### Changed
+
+- dashboard layout
+
+### Removed
+
+- previous months cards
