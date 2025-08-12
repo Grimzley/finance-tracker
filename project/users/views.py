@@ -86,12 +86,14 @@ def dashboard_view(request):
     summary = past.pop(0)
 
     budget_labels = ["Food", "Bills", "Transportation", "Shopping", "Entertainment", "Healthcare", "Savings", "Other"]
-    this_month = []
-    last_month = []
+    this_month_progress = []
+    this_month_spent = []
+    last_month_progress = []
     for budget in budgets:
-        this_month.append(float(budget['progress']))
+        this_month_progress.append(float(budget['progress']))
+        this_month_spent.append(float(budget['spent']))
     for budget in budgets_last_month:
-        last_month.append(float(budget['progress']))
+        last_month_progress.append(float(budget['progress']))
 
     context = {
         'recent': recent,
@@ -102,8 +104,9 @@ def dashboard_view(request):
         'total': total,
         'past': past,
         'budget_labels': json.dumps(budget_labels),
-        'this_month_data': json.dumps(this_month),
-        'last_month_data': json.dumps(last_month),
+        'this_month_data': json.dumps(this_month_progress),
+        'last_month_data': json.dumps(last_month_progress),
+        'this_month_spent': json.dumps(this_month_spent),
     }
     return render(request, 'dashboard.html', context)
 

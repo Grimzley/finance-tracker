@@ -223,16 +223,29 @@
                         </div>
                         {% endfor %}
                     </div>
-                    <!-- Budget Radar Chart -->
+                    
                     <div class="row justify-content-center">
-                        <div style="max-width: 500px;">
-                            <canvas id="budget-radar"
-                                data-labels='{{ budget_labels|safe }}'
-                                data-this-month='{{ this_month_data|safe }}'
-                                data-last-month='{{ last_month_data|safe }}'>
-                            </canvas>
+                        <!-- Budget Radar Chart -->
+                        <div class="col-md-6 text-center">
+                            <div class="mx-auto" style="max-width: 400px;">
+                                <canvas class="mx-auto"  id="budget-radar"
+                                    data-labels='{{ budget_labels|safe }}'
+                                    data-this-month='{{ this_month_data|safe }}'
+                                    data-last-month='{{ last_month_data|safe }}'>
+                                </canvas>
+                            </div>
                         </div>
+                        <!-- Budget Pie Chart -->
+                         <div class="col-md-6 text-center">
+                            <div class="mx-auto" style="max-width: 400px;">
+                                <canvas class="mx-auto" id="budget-pie"
+                                    data-labels='{{ budget_labels|safe }}'
+                                    data-values='{{ this_month_spent|safe }}'>
+                                </canvas>
+                            </div>
+                         </div>
                     </div>
+                    
                     <!-- Reports -->
                     <div class="row align-items-center border-bottom mt-3">
                         <div class="col-md-4 text-center text-md-start">
@@ -347,6 +360,7 @@
     <script src="{% static 'js/validate.js' %}"></script>
     <script src="{% static 'js/tooltips.js' %}"></script>
     <script src="{% static 'js/radar.js' %}"></script>
+    <script src="{% static 'js/pie.js' %}"></script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!-- Chart JS -->
