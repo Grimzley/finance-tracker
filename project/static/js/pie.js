@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const pieCanvas = document.getElementById('budget-pie');
     const pieLabels = JSON.parse(pieCanvas.dataset.labels);
     const rawData = JSON.parse(pieCanvas.dataset.values).map(Number);
-
     const pieData = rawData.map(v => v === 0 ? 0.0001 : v);
 
     const categoryColors = [
@@ -15,10 +14,6 @@ document.addEventListener('DOMContentLoaded', function () {
         '#f8bbd0', // Savings
         '#17171c'  // Other
     ];
-
-    console.log("Pie Labels:", pieLabels);
-    console.log("Pie Data (Chart):", pieData);
-    console.log("Raw Data (Tooltip):", rawData);
 
     new Chart(pieCanvas, {
         type: 'pie',
@@ -33,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
             responsive: true,
             plugins: {
                 legend: {
+                    labels: { color: "#fff" },
                     position: 'top'
                 },
                 tooltip: {

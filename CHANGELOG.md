@@ -81,6 +81,16 @@ All notable changes to this project will be documented in this file.
 
 - updated feature images
 
-### Fixed
+## 2025-08-12
 
-- 
+### Added
+
+- income vs expense bar chart
+
+### Changed
+
+- dashboard layout
+
+### Removed
+
+- previous months cards

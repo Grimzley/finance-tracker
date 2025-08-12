@@ -29,7 +29,6 @@ def get_monthly_summary(user, month):
         'total_income': income,
         'total_expenses': expenses,
         'total_savings': savings,
-        'net_finances': income - expenses - savings
     }
 
 def get_total_summary(user):
@@ -53,5 +52,4 @@ def get_total_summary(user):
         'total_income': income,
         'total_expenses': expenses,
         'total_savings': savings,
-        'net_finances': income - expenses - savings
     }

@@ -33,6 +33,13 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         options: {
             responsive: true,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: "#fff",
+                    },
+                },
+            },
             scales: {
                 r: {
                     angleLines: { color: '#fff' },
