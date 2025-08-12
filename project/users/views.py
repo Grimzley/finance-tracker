@@ -68,12 +68,15 @@ def logout_view(request):
 @never_cache
 @login_required
 def dashboard_view(request):
+    today = date.today()
+    last_month_date = (today.replace(day=1) - timedelta(days=30)).replace(day=1)
+
     recent = Transaction.objects.filter(user=request.user).order_by('-created_at')[:10]
     form = TransactionForm()
     budgets = get_monthly_budget_summary(request.user)
+    budgets_last_month = get_monthly_budget_summary(request.user, last_month_date)
     formset = BudgetFormSet(queryset=Budget.objects.filter(user=request.user))
 
-    today = date.today()
     total = get_total_summary(request.user)
     past = []
     for i in range(5):
@@ -84,9 +87,11 @@ def dashboard_view(request):
 
     budget_labels = ["Food", "Bills", "Transportation", "Shopping", "Entertainment", "Healthcare", "Savings", "Other"]
     this_month = []
-    last_month = [10, 100, 90, 80, 100, 50, 20, 30]
+    last_month = []
     for budget in budgets:
         this_month.append(float(budget['progress']))
+    for budget in budgets_last_month:
+        last_month.append(float(budget['progress']))
 
     context = {
         'recent': recent,

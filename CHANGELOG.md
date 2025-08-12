@@ -70,3 +70,17 @@ All notable changes to this project will be documented in this file.
 
 - login/register display
 - progress bar division by zero
+
+## 2025-08-11
+
+### Added
+
+- 
+
+### Changed
+
+- updated feature images
+
+### Fixed
+
+- 
