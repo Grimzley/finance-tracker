@@ -11,7 +11,6 @@ td.text-truncate {
   max-width: 100px;
 }
 
-/* Landing Page Styles */
 section {
   padding: 60px 0;
 }
@@ -30,4 +29,12 @@ section {
 @keyframes spin {
   0% {transform: rotate(0deg);}
   100% {transform: rotate(360deg);}
+}
+
+@media (min-width: 768px) {
+  .scroll-mobile {
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+    overflow-x: scroll;
+  }
 }

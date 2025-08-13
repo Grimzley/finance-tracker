@@ -16,7 +16,7 @@ from transactions.models import Transaction
 from budgets.models import Budget
 
 from budgets.utils import get_monthly_budget_summary
-from reports.utils import get_monthly_summary, get_total_summary
+from reports.utils import get_monthly_summary
 
 def register_view(request):
     error_message = None
@@ -71,20 +71,18 @@ def dashboard_view(request):
     today = date.today()
     last_month_date = (today.replace(day=1) - timedelta(days=30)).replace(day=1)
 
-    recent = Transaction.objects.filter(user=request.user).order_by('-created_at')[:10]
     form = TransactionForm()
+    recent = Transaction.objects.filter(user=request.user).order_by('-created_at')[:10]
     budgets = get_monthly_budget_summary(request.user)
     budgets_last_month = get_monthly_budget_summary(request.user, last_month_date)
     formset = BudgetFormSet(queryset=Budget.objects.filter(user=request.user))
 
-    total = get_total_summary(request.user)
     past = []
     for i in range(5):
         first_day = (today.replace(day=1) - timedelta(days=30*i)).replace(day=1)
         summary = get_monthly_summary(request.user, first_day)
         past.append(summary)
-    summary = past.pop(0)
-
+ 
     budget_labels = ["Food", "Bills", "Transportation", "Shopping", "Entertainment", "Healthcare", "Savings", "Other"]
     this_month_progress = []
     this_month_spent = []
@@ -95,16 +93,21 @@ def dashboard_view(request):
     for budget in budgets_last_month:
         last_month_progress.append(float(budget['progress']))
 
-    months = [summary['month'].strftime('%b')]
-    income = [float(summary['total_income'])]
-    saved = [float(summary['total_savings'])]
-    expenses = [float(summary['total_expenses'])]
+    months = []
+    income = []
+    saved = []
+    expenses = []
+    net_balance = []
 
     for month in past:
         months.append(month['month'].strftime('%b'))
         income.append(float(month['total_income']))
         saved.append(float(month['total_savings']))
         expenses.append(float(month['total_expenses']))
+        net_balance.append(float(month['net_balance']))
+    
+    summary = past.pop(0)
+    balance = net_balance[0]
 
     context = {
         'recent': recent,
@@ -112,16 +115,17 @@ def dashboard_view(request):
         'budgets': budgets,
         'formset': formset,
         'summary': summary,
-        'total': total,
         'past': past,
         'budget_labels': json.dumps(budget_labels),
-        'this_month_data': json.dumps(this_month_progress),
-        'last_month_data': json.dumps(last_month_progress),
-        'this_month_spent': json.dumps(this_month_spent),
+        'this_month_data': this_month_progress,
+        'last_month_data': last_month_progress,
+        'this_month_spent': this_month_spent,
         'months': json.dumps(months),
-        'income': json.dumps(income),
-        'saved': json.dumps(saved),
-        'expenses': json.dumps(expenses),
+        'income': income,
+        'saved': saved,
+        'expenses': expenses,
+        'net_balance': net_balance,
+        'balance': balance
     }
     return render(request, 'dashboard.html', context)
 
