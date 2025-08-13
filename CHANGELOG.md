@@ -94,3 +94,9 @@ All notable changes to this project will be documented in this file.
 ### Removed
 
 - previous months cards
+
+## 2025-08-13
+
+### Changed
+
+- improved mobile layout

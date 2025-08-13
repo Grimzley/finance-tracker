@@ -16,7 +16,7 @@ def get_monthly_budget_summary(user, date=timezone.now()):
         spent = spent_map.get(budget.category, 0)
         remaining = budget.limit - spent if budget.limit > 0 else None
         if budget.limit == 0:
-            progress = 100
+            progress = 0
         else:
             progress = min(100, (spent / budget.limit) * 100)
         summary.append({
