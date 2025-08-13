@@ -29,27 +29,5 @@ def get_monthly_summary(user, month):
         'total_income': income,
         'total_expenses': expenses,
         'total_savings': savings,
-    }
-
-def get_total_summary(user):
-    income = Transaction.objects.filter(
-        user=user,
-        transaction_type='income',
-    ).aggregate(Sum('amount'))['amount__sum'] or 0
-
-    expenses = Transaction.objects.filter(
-        user=user,
-        transaction_type='expense',
-    ).exclude(category='savings').aggregate(Sum('amount'))['amount__sum'] or 0
-
-    savings = Transaction.objects.filter(
-        user=user,
-        transaction_type='expense',
-        category='savings',
-    ).aggregate(Sum('amount'))['amount__sum'] or 0
-
-    return {
-        'total_income': income,
-        'total_expenses': expenses,
-        'total_savings': savings,
+        'net_balance': income - expenses - savings
     }

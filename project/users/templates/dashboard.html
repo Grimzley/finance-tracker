@@ -58,41 +58,34 @@
                 <!-- Sidebar -->
                 <div class="col-4 bg-palette-two d-none d-xl-block text-center">
                     <!-- Summary -->
-                    <div class="row">
-                        <h3>Lifetime Finances</h3>
-                        <div class="col">
+                    <div class="row mt-3">
+                        <div class="col-12">
                             <div class="row">
                                 <div class="col-12">
-                                    Earned:
+                                    Current Balance:
                                 </div>
                                 <div class="col-12">
-                                    <span class="text-success">${{ total.total_income }}</span>
+                                    <div class="lead fw-bold">
+                                        {% if balance > 0 %}
+                                            <span class="text-success">${{ balance }}</span>
+                                        {% else %}
+                                            <span class="text-danger">${{ balance }}</span>
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="row">
-                                <div class="col-12">
-                                    Spent:
-                                </div>
-                                <div class="col-12">
-                                    <span class="text-danger">${{ total.total_expenses }}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="row">
-                                <div class="col-12">
-                                    Saved:
-                                </div>
-                                <div class="col-12">
-                                    <span class="text-palette-five">${{ total.total_income }}</span>
-                                </div>
+                        <div class="col-12">
+                            <div style="max-height: 200px;">
+                                <canvas class="balance-line"
+                                    data-labels='{{ months|safe }}'
+                                    data-values='{{ net_balance|safe }}'>
+                                </canvas>
                             </div>
                         </div>
                     </div>
                     <div class="row my-3">
-                        <h3>{{ summary.month|date:"F" }}</h3>
+                        <h3>{{ summary.month|date:"F Y" }}</h3>
                         <div class="col">
                             <div class="row">
                                 <div class="col-12">
@@ -119,7 +112,7 @@
                                     Saved:
                                 </div>
                                 <div class="col-12">
-                                    <span class="text-palette-five">${{ summary.total_income }}</span>
+                                    <span class="text-palette-five">${{ summary.total_savings }}</span>
                                 </div>
                             </div>
                         </div>
@@ -179,44 +172,37 @@
                     </div>
                     <!-- Summary -->
                     <div class="row justify-content-center border-bottom text-center d-xl-none my-3">
-                        <div class="col-md-5">
+                        <div class="col-12">
                             <div class="row">
-                                <h3>Lifetime Finances</h3>
-                                <div class="col">
+                                <div class="col-12">
                                     <div class="row">
                                         <div class="col-12">
-                                            Earned:
+                                            Current Balance:
                                         </div>
                                         <div class="col-12">
-                                            <span class="text-success">${{ total.total_income }}</span>
+                                            <div class="lead fw-bold">
+                                                {% if balance > 0 %}
+                                                    <span class="text-success">${{ balance }}</span>
+                                                {% else %}
+                                                    <span class="text-danger">${{ balance }}</span>
+                                                {% endif %}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            Spent:
-                                        </div>
-                                        <div class="col-12">
-                                            <span class="text-danger">${{ total.total_expenses }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            Saved:
-                                        </div>
-                                        <div class="col-12">
-                                            <span class="text-palette-five">${{ total.total_income }}</span>
-                                        </div>
+                                <div class="col-12">
+                                    <div style="max-height: 200px;">
+                                        <canvas class="balance-line"
+                                            data-labels='{{ months|safe }}'
+                                            data-values='{{ net_balance|safe }}'>
+                                        </canvas>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-12">
                             <div class="row">
-                                <h3>{{ summary.month|date:"F" }}</h3>
+                                <h3>{{ summary.month|date:"F Y" }}</h3>
                                 <div class="col">
                                     <div class="row">
                                         <div class="col-12">
@@ -243,7 +229,7 @@
                                             Saved:
                                         </div>
                                         <div class="col-12">
-                                            <span class="text-palette-five">${{ summary.total_income }}</span>
+                                            <span class="text-palette-five">${{ summary.total_savings }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -253,7 +239,7 @@
                     <!-- Budgets -->
                     <div class="row align-items-center my-3">
                         <div class="col-sm-6 text-center text-md-start">
-                            <h3>{{ summary.month|date:"F Y" }}</h3>
+                            <h3>Budget Categories</h3>
                         </div>
                         <div class="col-sm-6 text-center text-md-end">
                             <button class="btn btn-palette-three" data-bs-toggle="modal" data-bs-target="#budget-modal">
@@ -298,7 +284,7 @@
                     <div class="row justify-content-between mt-3 flex-nowrap overflow-auto scroll-mobile">
                         <!-- Budget Pie Chart -->
                         <div class="col-md-6">
-                            <div class="mx-auto" style="max-width: 400px;">
+                            <div class="mx-auto">
                                 <canvas class="mx-auto" id="budget-pie"
                                     data-labels='{{ budget_labels|safe }}'
                                     data-values='{{ this_month_spent|safe }}'>
@@ -307,7 +293,7 @@
                         </div>
                         <!-- Budget Radar Chart -->
                         <div class="col-md-6">
-                            <div class="mx-auto" style="max-width: 400px;">
+                            <div class="mx-auto">
                                 <canvas class="mx-auto"  id="budget-radar"
                                     data-labels='{{ budget_labels|safe }}'
                                     data-this-month='{{ this_month_data|safe }}'
@@ -333,14 +319,12 @@
                 </div>
                 <div class="row justify-content-center my-3">
                     <div class="col">
-                        <div style="position: relative; width: 100%;">
-                            <canvas id="month-bar"
-                                data-labels='{{ months|safe }}'
-                                data-income='{{ income|safe }}'
-                                data-saved='{{ saved|safe }}'
-                                data-expenses='{{ expenses|safe }}'>
-                            </canvas>
-                        </div>
+                        <canvas id="month-bar"
+                            data-labels='{{ months|safe }}'
+                            data-income='{{ income|safe }}'
+                            data-saved='{{ saved|safe }}'
+                            data-expenses='{{ expenses|safe }}'>
+                        </canvas>
                     </div>
                 </div>
                 <!--
@@ -440,6 +424,7 @@
     <script src="{% static 'js/transaction.js' %}"></script>
     <script src="{% static 'js/validate.js' %}"></script>
     <script src="{% static 'js/tooltips.js' %}"></script>
+    <script src="{% static 'js/line.js' %}"></script>
     <script src="{% static 'js/pie.js' %}"></script>
     <script src="{% static 'js/radar.js' %}"></script>
     <script src="{% static 'js/bar.js' %}"></script>

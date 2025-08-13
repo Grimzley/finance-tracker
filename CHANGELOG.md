@@ -97,6 +97,9 @@ All notable changes to this project will be documented in this file.
 
 ## 2025-08-13
 
+- added balance line chart
+
 ### Changed
 
 - improved mobile layout
+- update landing page images
