@@ -67,9 +67,9 @@
                                 <div class="col-12">
                                     <div class="lead fw-bold">
                                         {% if balance > 0 %}
-                                            <span class="text-success">${{ balance }}</span>
+                                            <span class="text-success">${{ balance|floatformat:2 }}</span>
                                         {% else %}
-                                            <span class="text-danger">${{ balance }}</span>
+                                            <span class="text-danger">${{ balance|floatformat:2 }}</span>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -182,9 +182,9 @@
                                         <div class="col-12">
                                             <div class="lead fw-bold">
                                                 {% if balance > 0 %}
-                                                    <span class="text-success">${{ balance }}</span>
+                                                    <span class="text-success">${{ balance|floatformat:2 }}</span>
                                                 {% else %}
-                                                    <span class="text-danger">${{ balance }}</span>
+                                                    <span class="text-danger">${{ balance|floatformat:2 }}</span>
                                                 {% endif %}
                                             </div>
                                         </div>
