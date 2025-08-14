@@ -36,6 +36,8 @@ class TransactionForm(forms.ModelForm):
             'title': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Title',
+                'pattern': '.*[A-Za-z].*',
+                'title': "Title must contain non-whitespace characters"
             }),
             'amount': forms.NumberInput(attrs={
                 'class': 'form-control',

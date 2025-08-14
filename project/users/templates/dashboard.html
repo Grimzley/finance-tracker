@@ -252,7 +252,7 @@
                         <div class="col-6 col-md-3 my-3">
                             <div class="card bg-palette-two border-palette-five text-light h-100">
                                 <div class="card-header">
-                                    <div class="progress">
+                                    <div class="progress bg-palette-five">
                                         <div class="progress-bar {% if budget.progress < 70 %}bg-success{% elif budget.progress < 90%}bg-warning{% else %}bg-danger{% endif %}" role="progressbar" style="width:{{ budget.progress }}%"></div>
                                     </div>
                                 </div>
@@ -322,7 +322,7 @@
                         <canvas id="month-bar"
                             data-labels='{{ months|safe }}'
                             data-income='{{ income|safe }}'
-                            data-saved='{{ saved|safe }}'
+                            data-saved='{{ savings|safe }}'
                             data-expenses='{{ expenses|safe }}'>
                         </canvas>
                     </div>
