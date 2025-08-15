@@ -97,9 +97,18 @@ All notable changes to this project will be documented in this file.
 
 ## 2025-08-13
 
-- added balance line chart
+### Added
+
+- balance line chart
 
 ### Changed
 
 - improved mobile layout
-- update landing page images
+- updated landing page images
+
+## 2025-08-14
+
+### Fixed
+
+- balance chart calculations
+- blank transaction title

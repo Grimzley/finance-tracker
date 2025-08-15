@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     backgroundColor: '#198754'
                 },
                 {
-                    label: 'Saved',
+                    label: 'Savings',
                     data: savedData,
                     backgroundColor: '#adb5bd'
                 },

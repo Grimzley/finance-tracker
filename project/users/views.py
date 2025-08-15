@@ -70,19 +70,28 @@ def logout_view(request):
 def dashboard_view(request):
     today = date.today()
     last_month_date = (today.replace(day=1) - timedelta(days=30)).replace(day=1)
-
+    join_date = request.user.date_joined.date()
     form = TransactionForm()
-    recent = Transaction.objects.filter(user=request.user).order_by('-created_at')[:10]
-    budgets = get_monthly_budget_summary(request.user)
-    budgets_last_month = get_monthly_budget_summary(request.user, last_month_date)
     formset = BudgetFormSet(queryset=Budget.objects.filter(user=request.user))
 
-    past = []
-    for i in range(5):
+    # Recent Transactions
+    recent = Transaction.objects.filter(user=request.user).order_by('-created_at')[:10]
+
+    # Budget Data
+    budgets = get_monthly_budget_summary(request.user)
+    budgets_last_month = get_monthly_budget_summary(request.user, last_month_date)
+
+    # Get All Monthly Reports
+    month_data = []
+    num_months = (today.year - join_date.year) * 12 + (today.month - join_date.month)
+    if today.day < join_date.day:
+        num_months -= 1
+    for i in range(max(5, num_months)):
         first_day = (today.replace(day=1) - timedelta(days=30*i)).replace(day=1)
         summary = get_monthly_summary(request.user, first_day)
-        past.append(summary)
- 
+        month_data.append(summary)
+    
+    # Pie and Radar Chart Data
     budget_labels = ["Food", "Bills", "Transportation", "Shopping", "Entertainment", "Healthcare", "Savings", "Other"]
     this_month_progress = []
     this_month_spent = []
@@ -93,21 +102,26 @@ def dashboard_view(request):
     for budget in budgets_last_month:
         last_month_progress.append(float(budget['progress']))
 
+    # Line and Bar Chart Data
     months = []
     income = []
-    saved = []
+    savings = []
     expenses = []
-    net_balance = []
-
+    past = month_data[:5]
     for month in past:
         months.append(month['month'].strftime('%b'))
         income.append(float(month['total_income']))
-        saved.append(float(month['total_savings']))
+        savings.append(float(month['total_savings']))
         expenses.append(float(month['total_expenses']))
-        net_balance.append(float(month['net_balance']))
-    
-    summary = past.pop(0)
+    net_balance = []
+    for month in month_data:
+        bal = float(month['net_balance'])
+        for i in range(len(net_balance)):
+            net_balance[i] = net_balance[i] + bal
+        net_balance.append(bal)
+    summary = past[0]
     balance = net_balance[0]
+    net_balance = net_balance[:5]
 
     context = {
         'recent': recent,
@@ -122,7 +136,7 @@ def dashboard_view(request):
         'this_month_spent': this_month_spent,
         'months': json.dumps(months),
         'income': income,
-        'saved': saved,
+        'savings': savings,
         'expenses': expenses,
         'net_balance': net_balance,
         'balance': balance
