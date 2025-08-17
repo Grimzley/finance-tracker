@@ -112,3 +112,10 @@ All notable changes to this project will be documented in this file.
 
 - balance chart calculations
 - blank transaction title
+
+## 2025-08-17
+
+### Changed
+
+- grouped numbers by thousands
+- budget labels and values in separate columns

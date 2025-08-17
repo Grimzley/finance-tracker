@@ -67,9 +67,9 @@
                                 <div class="col-12">
                                     <div class="lead fw-bold">
                                         {% if balance > 0 %}
-                                            <span class="text-success">${{ balance|floatformat:2 }}</span>
+                                            <span class="text-success">${{ balance|floatformat:"2g" }}</span>
                                         {% else %}
-                                            <span class="text-danger">${{ balance|floatformat:2 }}</span>
+                                            <span class="text-danger">${{ balance|floatformat:"2g" }}</span>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -92,7 +92,7 @@
                                     Earned:
                                 </div>
                                 <div class="col-12">
-                                    <span class="text-success">${{ summary.total_income }}</span>
+                                    <span class="text-success">${{ summary.total_income|floatformat:"2g" }}</span>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +102,7 @@
                                     Spent:
                                 </div>
                                 <div class="col-12">
-                                    <span class="text-danger">${{ summary.total_expenses }}</span>
+                                    <span class="text-danger">${{ summary.total_expenses|floatformat:"2g" }}</span>
                                 </div>
                             </div>
                         </div>
@@ -112,7 +112,7 @@
                                     Saved:
                                 </div>
                                 <div class="col-12">
-                                    <span class="text-palette-five">${{ summary.total_savings }}</span>
+                                    <span class="text-palette-five">${{ summary.total_savings|floatformat:"2g" }}</span>
                                 </div>
                             </div>
                         </div>
@@ -131,7 +131,7 @@
                                     {% else %}
                                     <td class="text-danger">
                                     {% endif %}
-                                        ${{ transaction.amount }}
+                                        ${{ transaction.amount|floatformat:"2g" }}
                                     </td>
                                     <td class="text-palette-four">{{ transaction.created_at|date:"M d" }}</td>
                                 </tr>
@@ -182,9 +182,9 @@
                                         <div class="col-12">
                                             <div class="lead fw-bold">
                                                 {% if balance > 0 %}
-                                                    <span class="text-success">${{ balance|floatformat:2 }}</span>
+                                                    <span class="text-success">${{ balance|floatformat:"2g" }}</span>
                                                 {% else %}
-                                                    <span class="text-danger">${{ balance|floatformat:2 }}</span>
+                                                    <span class="text-danger">${{ balance|floatformat:"2g" }}</span>
                                                 {% endif %}
                                             </div>
                                         </div>
@@ -209,7 +209,7 @@
                                             Earned:
                                         </div>
                                         <div class="col-12">
-                                            <span class="text-success">${{ summary.total_income }}</span>
+                                            <span class="text-success">${{ summary.total_income|floatformat:"2g" }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -219,7 +219,7 @@
                                             Spent:
                                         </div>
                                         <div class="col-12">
-                                            <span class="text-danger">${{ summary.total_expenses }}</span>
+                                            <span class="text-danger">${{ summary.total_expenses|floatformat:"2g" }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -229,7 +229,7 @@
                                             Saved:
                                         </div>
                                         <div class="col-12">
-                                            <span class="text-palette-five">${{ summary.total_savings }}</span>
+                                            <span class="text-palette-five">${{ summary.total_savings|floatformat:"2g" }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -259,23 +259,44 @@
                                 <div class="card-body text-center">
                                     <i style="font-size: 2em;" class="bi {{ budget.category|category_icon }} {{ budget.category|category_color }}"></i>
                                     <div class="card-title text-palette-five">
-                                        Budget: 
-                                        {% if budget.remaining is None %}
-                                            Unlimited
-                                        {% else %}
-                                            ${{ budget.limit }}
-                                        {% endif %}
+                                        <div class="row">
+                                            <div class="col-12">
+                                                Budget:
+                                            </div>
+                                            <div class="col-12">
+                                                <span class="fw-bold">
+                                                    {% if budget.remaining is None %}
+                                                        Unlimited
+                                                    {% else %}
+                                                        ${{ budget.limit|floatformat:"2g" }}
+                                                    {% endif %}
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="card-text text-palette-five">Spent: ${{ budget.spent }}</div>
-                                    {% if budget.remaining is not None %}
-                                        <div class="card-text lead fw-bold">
-                                            {% if budget.remaining > 0 %}
-                                                <span class="text-success">${{ budget.remaining }}</span>
-                                            {% else %}
-                                                <span class="text-danger">${{ budget.remaining }}</span>
+                                    <div class="card-text text-palette-five">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                Spent:
+                                            </div>
+                                            <div class="col-12">
+                                                <span class="fw-bold">
+                                                    ${{ budget.spent|floatformat:"2g" }}
+                                                </span>
+                                            </div>
+                                            {% if budget.remaining is not None %}
+                                                <div class="col-12">
+                                                    <div class="card-text lead fw-bold">
+                                                        {% if budget.remaining > 0 %}
+                                                            <span class="text-success">${{ budget.remaining|floatformat:"2g"}}</span>
+                                                        {% else %}
+                                                            <span class="text-danger">${{ budget.remaining |floatformat:"2g"}}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
                                             {% endif %}
                                         </div>
-                                    {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -294,7 +315,7 @@
                         <!-- Budget Radar Chart -->
                         <div class="col-md-6">
                             <div class="mx-auto">
-                                <canvas class="mx-auto"  id="budget-radar"
+                                <canvas class="mx-auto" id="budget-radar"
                                     data-labels='{{ budget_labels|safe }}'
                                     data-this-month='{{ this_month_data|safe }}'
                                     data-last-month='{{ last_month_data|safe }}'>
