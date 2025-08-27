@@ -2,15 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+
 ## 2025-08-02
 
 - Deployed to Vercel with Supabase
+
 
 ## 2025-08-03
 
 ### Added
 
 - loading spinners to landing page authentication form
+
 
 ## 2025-08-04
 
@@ -30,6 +33,7 @@ All notable changes to this project will be documented in this file.
 - removed caching from authenticated pages
 - budget ordering and size
 
+
 ## 2025-08-08
 
 ### Added
@@ -40,6 +44,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - Docker race condition
+
 
 ## 2025-08-09
 
@@ -54,6 +59,7 @@ All notable changes to this project will be documented in this file.
 
 - category icons
 - improved error feedback
+
 
 ## 2025-08-10
 
@@ -71,6 +77,7 @@ All notable changes to this project will be documented in this file.
 - login/register display
 - progress bar division by zero
 
+
 ## 2025-08-11
 
 ### Added
@@ -80,6 +87,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - updated feature images
+
 
 ## 2025-08-12
 
@@ -95,6 +103,7 @@ All notable changes to this project will be documented in this file.
 
 - previous months cards
 
+
 ## 2025-08-13
 
 ### Added
@@ -106,6 +115,7 @@ All notable changes to this project will be documented in this file.
 - improved mobile layout
 - updated landing page images
 
+
 ## 2025-08-14
 
 ### Fixed
@@ -113,9 +123,17 @@ All notable changes to this project will be documented in this file.
 - balance chart calculations
 - blank transaction title
 
+
 ## 2025-08-17
 
 ### Changed
 
 - grouped numbers by thousands
 - budget labels and values in separate columns
+
+
+## 2025-08-27
+
+### Fixed
+
+- static file serving in production

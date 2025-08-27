@@ -1,9 +1,8 @@
 import os
-import sys
-
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
-
 from django.core.asgi import get_asgi_application
+from whitenoise import WhiteNoise
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
+
 application = get_asgi_application()
-app = application
+app = WhiteNoise(application, root=os.path.join(os.path.dirname(__file__), "..", "staticfiles"))
