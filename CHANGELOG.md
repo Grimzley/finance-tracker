@@ -132,8 +132,8 @@ All notable changes to this project will be documented in this file.
 - budget labels and values in separate columns
 
 
-## 2025-08-27
+## 2025-08-28
 
 ### Fixed
 
-- static file serving in production
+- white noise setup and static file serving in production
