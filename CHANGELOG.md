@@ -13,6 +13,10 @@ All notable changes to this project will be documented in this file.
 
 - changelog change order
 
+### Removed
+
+- budget radar chart
+
 
 ## 2025-08-28
 

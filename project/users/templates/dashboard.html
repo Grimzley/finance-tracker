@@ -302,9 +302,9 @@
                         </div>
                         {% endfor %}
                     </div>
-                    <div class="row justify-content-between mt-3 flex-nowrap overflow-auto scroll-mobile">
+                    <div class="row justify-content-center mt-3 flex-nowrap overflow-auto scroll-mobile">
                         <!-- Budget Pie Chart -->
-                        <div class="col-md-6">
+                        <div class="col">
                             <div class="mx-auto">
                                 <canvas class="mx-auto" id="budget-pie"
                                     data-labels='{{ budget_labels|safe }}'
@@ -312,7 +312,8 @@
                                 </canvas>
                             </div>
                         </div>
-                        <!-- Budget Radar Chart -->
+                        <!--
+                        Budget Radar Chart
                         <div class="col-md-6">
                             <div class="mx-auto">
                                 <canvas class="mx-auto" id="budget-radar"
@@ -322,6 +323,7 @@
                                 </canvas>
                             </div>
                         </div>
+                        -->
                     </div>
                 </div>
                 <!-- Reports -->
@@ -424,7 +426,6 @@
     <script src="{% static 'js/tooltips.js' %}"></script>
     <script src="{% static 'js/line.js' %}"></script>
     <script src="{% static 'js/pie.js' %}"></script>
-    <script src="{% static 'js/radar.js' %}"></script>
     <script src="{% static 'js/bar.js' %}"></script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
