@@ -333,7 +333,7 @@
                         <i style="font-size: 2em;" class="bi bi-calendar2-check-fill text-palette-blue"></i>
                     </div>
                     <div class="col-md-4 text-center text-md-end">
-                        <a href="{% url 'dashboard' %}" class="text-palette-four text-decoration-none">
+                        <a href="{% url 'report_list' %}" class="text-palette-four text-decoration-none">
                             <i class="bi bi-arrow-right"></i> See More
                         </a>
                     </div>
@@ -348,29 +348,6 @@
                         </canvas>
                     </div>
                 </div>
-                <!--
-                <div class="row justify-content-center align-items-center text-dark my-3">
-                    {% for month in past %}
-                    <div class="col-sm-8 col-md-3">
-                        <div class="card bg-palette-two border-palette-five text-light">
-                            <div class="card-body text-center">
-                                <i class="bi bi-coin text-palette-yellow"></i>
-                                <h4 class="card-title">{{ month.month|date:"M" }}</h4>
-                                <div>
-                                    <span class="text-success">${{ month.total_income }}</span>
-                                </div>
-                                <div>
-                                    <span class="text-danger">${{ month.total_expenses }}</span>
-                                </div>
-                                <div>
-                                    <span class="text-palette-five">${{ month.total_savings }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-                -->
             </div>
         </div>
     </main>

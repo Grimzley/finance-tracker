@@ -136,4 +136,11 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
-- white noise setup and static file serving in production
+- white noise setup and static file serving in production\
+
+
+## 2025-09-07
+
+### Added
+
+- monthly finance reports page
