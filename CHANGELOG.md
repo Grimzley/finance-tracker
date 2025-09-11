@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2025-09-10
+
+### Added
+
+- transaction filtering
+
+
 ## 2025-09-07
 
 ### Added

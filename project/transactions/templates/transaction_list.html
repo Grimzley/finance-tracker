@@ -57,6 +57,24 @@
             <div class="row">
                 <div class="col text-center">
                     <h1 class="display-4 text-light">My Transactions</h1>
+                    <form method="GET">
+                        <select name="type" onchange="this.form.submit()">
+                            <option value="" {% if not selected_type %}selected{% endif %}>All Types</option>
+                            <option value="income" {% if selected_type == 'income' %}selected{% endif %}>Income</option>
+                            <option value="expense" {% if selected_type == 'expense' %}selected{% endif %}>Expense</option>
+                        </select>
+                        <select name="category" onchange="this.form.submit()">
+                            <option value="" {% if not selected_category %}selected{% endif %}>All Categories</option>
+                            {% for value, label in categories %}
+                                <option value="{{ value }}" {% if selected_category == value %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                        {% if selected_type or selected_category %}
+                            <button type="button" onclick="window.location.href='{% url 'transaction_list' %}'">
+                                Reset Filters
+                            </button>
+                        {% endif %}
+                    </form>
                     <button id="add-button" class="btn btn-success my-3" data-bs-toggle="modal" data-bs-target="#transaction-modal" data-create-url="{% url 'create_transaction' %}">
                         <i class="bi bi-plus"></i> Add Transaction
                     </button>
