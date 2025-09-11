@@ -69,7 +69,6 @@ def logout_view(request):
 @login_required
 def dashboard_view(request):
     today = date.today()
-    last_month_date = (today.replace(day=1) - timedelta(days=30)).replace(day=1)
     join_date = request.user.date_joined.date()
     form = TransactionForm()
     formset = BudgetFormSet(queryset=Budget.objects.filter(user=request.user))
@@ -79,7 +78,6 @@ def dashboard_view(request):
 
     # Budget Data
     budgets = get_monthly_budget_summary(request.user)
-    budgets_last_month = get_monthly_budget_summary(request.user, last_month_date)
 
     # Get All Monthly Reports
     month_data = []
@@ -91,16 +89,13 @@ def dashboard_view(request):
         summary = get_monthly_summary(request.user, first_day)
         month_data.append(summary)
     
-    # Pie and Radar Chart Data
+    # Pie Chart Data
     budget_labels = ["Food", "Bills", "Transportation", "Shopping", "Entertainment", "Healthcare", "Savings", "Other"]
     this_month_progress = []
     this_month_spent = []
-    last_month_progress = []
     for budget in budgets:
         this_month_progress.append(float(budget['progress']))
         this_month_spent.append(float(budget['spent']))
-    for budget in budgets_last_month:
-        last_month_progress.append(float(budget['progress']))
 
     # Line and Bar Chart Data
     months = []
@@ -132,7 +127,6 @@ def dashboard_view(request):
         'past': past,
         'budget_labels': json.dumps(budget_labels),
         'this_month_data': this_month_progress,
-        'last_month_data': last_month_progress,
         'this_month_spent': this_month_spent,
         'months': json.dumps(months),
         'income': income,

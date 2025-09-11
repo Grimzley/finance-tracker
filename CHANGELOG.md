@@ -3,62 +3,76 @@
 All notable changes to this project will be documented in this file.
 
 
-## 2025-08-02
-
-- Deployed to Vercel with Supabase
-
-
-## 2025-08-03
+## 2025-09-10
 
 ### Added
 
-- loading spinners to landing page authentication form
+- transaction filtering
 
 
-## 2025-08-04
+## 2025-09-07
 
 ### Added
 
-- Get Started and Login buttons activate appropriate forms
+- monthly finance reports page
 
 ### Changed
 
-- sticky nav and footer
-- nav button scroll adjusted to navbar
-- text formatting and colors
+- changelog change order
+
+### Removed
+
+- budget radar chart
+
+
+## 2025-08-28
 
 ### Fixed
 
-- form number constraints
-- removed caching from authenticated pages
-- budget ordering and size
+- white noise setup and static file serving in production
 
 
-## 2025-08-08
-
-### Added
-
-- transaction tests
-- ci workflow
-
-### Fixed
-
-- Docker race condition
-
-
-## 2025-08-09
-
-### Added
-
-- user settings
-- username and password change, account deactivation
-- recent transaction title tooltip
-- register validation
+## 2025-08-17
 
 ### Changed
 
-- category icons
-- improved error feedback
+- grouped numbers by thousands
+- budget labels and values in separate columns
+
+
+## 2025-08-14
+
+### Fixed
+
+- balance chart calculations
+- blank transaction title
+
+
+## 2025-08-13
+
+### Added
+
+- balance line chart
+
+### Changed
+
+- improved mobile layout
+- updated landing page images
+
+
+## 2025-08-12
+
+### Added
+
+- income vs expense bar chart
+
+### Changed
+
+- dashboard layout
+
+### Removed
+
+- previous months cards
 
 
 ## 2025-08-10
@@ -89,51 +103,59 @@ All notable changes to this project will be documented in this file.
 - updated feature images
 
 
-## 2025-08-12
+## 2025-08-09
 
 ### Added
 
-- income vs expense bar chart
+- user settings
+- username and password change, account deactivation
+- recent transaction title tooltip
+- register validation
 
 ### Changed
 
-- dashboard layout
-
-### Removed
-
-- previous months cards
+- category icons
+- improved error feedback
 
 
-## 2025-08-13
+## 2025-08-08
 
 ### Added
 
-- balance line chart
-
-### Changed
-
-- improved mobile layout
-- updated landing page images
-
-
-## 2025-08-14
+- transaction tests
+- ci workflow
 
 ### Fixed
 
-- balance chart calculations
-- blank transaction title
+- Docker race condition
 
 
-## 2025-08-17
+## 2025-08-04
+
+### Added
+
+- Get Started and Login buttons activate appropriate forms
 
 ### Changed
 
-- grouped numbers by thousands
-- budget labels and values in separate columns
-
-
-## 2025-08-28
+- sticky nav and footer
+- nav button scroll adjusted to navbar
+- text formatting and colors
 
 ### Fixed
 
-- white noise setup and static file serving in production
+- form number constraints
+- removed caching from authenticated pages
+- budget ordering and size
+
+
+## 2025-08-03
+
+### Added
+
+- loading spinners to landing page authentication form
+
+
+## 2025-08-02
+
+- Deployed to Vercel with Supabase
