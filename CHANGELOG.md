@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 
 ## 2025-09-15
 
+### Added
+
+- Terms of Use and Privacy Policy pages
+
 ### Changed
 
 - sticky footer to push down footer

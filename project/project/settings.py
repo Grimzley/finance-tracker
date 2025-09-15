@@ -18,7 +18,8 @@ INSTALLED_APPS = [
     'users',
     'transactions',
     'budgets',
-    'reports'
+    'reports',
+    'legal'
 ]
 
 MIDDLEWARE = [
