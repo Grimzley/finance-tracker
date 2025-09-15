@@ -7,6 +7,7 @@ class TransactionViewTest(TestCase):
         self.client = Client()
         self.user = User.objects.create_user(username='testuser', password='testpassword')
         Transaction.objects.create(user=self.user, title="Kbbq", amount=25.99, transaction_type="expense", category="food")
+        Transaction.objects.create(user=self.user, title="Paycheck", amount=500, transaction_type="income", category="salary")
 
     def test_transaction_list_uses_correct_template(self):
         self.client.force_login(self.user)
@@ -25,9 +26,17 @@ class TransactionViewTest(TestCase):
     def test_transaction_list_context(self):
         self.client.force_login(self.user)
         response = self.client.get('/transactions/')
+        self.assertEqual(len(response.context['transactions']), 2)
+        self.assertContains(response, "Kbbq")
+        self.assertContains(response, "Paycheck")
+        self.assertNotContains(response, "Add a Transaction to Get Started!")
+
+    def test_transaction_list_filter(self):
+        self.client.force_login(self.user)
+        response = self.client.get('/transactions/?type=expense&category=food')
         self.assertEqual(len(response.context['transactions']), 1)
         self.assertContains(response, "Kbbq")
-        self.assertNotContains(response, "Add a Transaction to Get Started!")
+        self.assertNotContains(response, "Paycheck")
 
     def test_transaction_list_empty(self):
         self.client.force_login(self.user)

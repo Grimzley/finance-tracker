@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Terms of Use and Privacy Policy pages
+- more transaction tests
+- user tests
 
 ### Changed
 

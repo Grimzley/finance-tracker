@@ -20,12 +20,36 @@ class TransactionFormTest(TestCase):
         response = self.client.post('/transactions/add/', data=form_data)
         self.assertTrue(Transaction.objects.filter(title='Hotpot').exists())
 
-    def test_dont_create_transaction_with_invalid_form(self):
+    def test_dont_create_transaction_with_invalid_title(self):
         Transaction.objects.all().delete()
         self.client.force_login(self.user)
         form_data = {
             'title': '',
-            'amount': '-25.99',
+            'amount': '35.00',
+            'transaction_type': 'expense',
+            'category': 'food',
+        }
+        response = self.client.post('/transactions/add/', data=form_data)
+        self.assertFalse(Transaction.objects.exists())
+    
+    def test_dont_create_transaction_with_invalid_amount(self):
+        Transaction.objects.all().delete()
+        self.client.force_login(self.user)
+        form_data = {
+            'title': 'Hotpot',
+            'amount': '-35.00',
+            'transaction_type': 'expense',
+            'category': 'food',
+        }
+        response = self.client.post('/transactions/add/', data=form_data)
+        self.assertFalse(Transaction.objects.exists())
+
+    def test_dont_create_transaction_with_invalid_category(self):
+        Transaction.objects.all().delete()
+        self.client.force_login(self.user)
+        form_data = {
+            'title': 'Hotpot',
+            'amount': '35.00',
             'transaction_type': 'income',
             'category': 'food',
         }
