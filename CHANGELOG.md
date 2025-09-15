@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2025-09-15
+
+### Changed
+
+- sticky footer to push down footer
+
+
 ## 2025-09-10
 
 ### Added
