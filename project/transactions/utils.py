@@ -43,5 +43,5 @@ def get_category_description(category):
         'entertainment': 'Leisure activities and events.',
         'health': 'Medical and wellness-related expenses.',
         'savings': 'Money intentionally set aside or transferred to savings.',
-        'exp_other': 'Anything that doesn’t fit into the main categories.',
+        'exp_other': "Anything that doesn't fit into the main categories.",
     }.get(category, 'Budget Category')

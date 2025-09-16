@@ -1,0 +1,159 @@
+{% load static %}
+{% load transaction_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <title>Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'css/main.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <!-- Navbar -->
+    <nav class="navbar fixed-top bg-palette-one navbar-dark">
+        <div class="container-xl">
+            <div class="navbar-brand">
+                <h1 class="fw-bold text-success">
+                    BalancedBudget
+                    <i class="bi bi-bank2"></i>
+                </h1>
+            </div>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="{% url 'dashboard' %}" class="btn btn-secondary">Home</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="flex-fill bg-white">
+        <section>
+            <div class="container-lg">
+                <div class="row">
+                    <h1 class="text-center">Privacy Policy</h1>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h5>Effective Date: 09/15/2025</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    BalancedBudget values your privacy. This Privacy Policy explains how we collect, use, store, and protect your information when you use our finance management platform.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Information We Collect</h5>
+                                    We may collect the following types of information:
+                                    <ul>
+                                        <li>
+                                            Account Information: Name, email address, and login credentials when you register an account.
+                                        </li>
+                                        <li>
+                                            Financial Data: Transactions, budgets, account balances, and other finance-related details that you input.
+                                        </li>
+                                        <li>
+                                            Usage Data: Log files, IP address, device information, and browser type for security and analytics.
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>How We Use Information</h5>
+                                    We use the collected information to:
+                                    <ul>
+                                        <li>
+                                            Provide and improve our financial management services
+                                        </li>
+                                        <li>
+                                            Secure user accounts and prevent fraud
+                                        </li>
+                                        <li>
+                                            Generate insights, budgets, and reports for your use
+                                        </li>
+                                        <li>
+                                            Communicate with you regarding your account or service updates
+                                        </li>
+                                    </ul>
+                                    We do <strong>not</strong> sell or rent your personal or financial information to third parties.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Data Storage & Security</h5>
+                                    <ul>
+                                        <li>
+                                            All sensitive data is stored securely using industry-standard encryption.
+                                        </li>
+                                        <li>
+                                            Access to your information is restricted to authorized personnel only.
+                                        </li>
+                                        <li>
+                                            While we take strong measures to protect your data, no system is completely secure, and we cannot guarantee absolute security.
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Third-Party Services</h5>
+                                    We may use third-party providers (e.g., hosting, analytics, or payment processors). These providers may process your data as necessary to support our services, subject to their own privacy policies.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Your Rights</h5>
+                                    Depending on your location, you may have the right to:
+                                    <ul>
+                                        <li>
+                                            Access and request a copy of your personal data
+                                        </li>
+                                        <li>
+                                            Correct inaccurate information
+                                        </li>
+                                        <li>
+                                            Request deletion of your account and associated data
+                                        </li>
+                                        <li>
+                                            Withdraw consent where applicable
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Changes to This Policy</h5>
+                                    We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated “Effective Date.”
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-palette-one">
+        <div class="container-xl border-top p-2">
+            <div class="text-center">
+                <a href="{% url 'terms' %}" class="me-3">Terms of Use</a>
+                <a href="{% url 'privacy' %}">Privacy Policy</a>
+                <div class="text-light">&copy; 2025 Michael Grimsley. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>
